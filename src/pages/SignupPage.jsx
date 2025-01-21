@@ -1,7 +1,10 @@
 import AuthForm from '../components/AuthForm'
 
-const SignupPage = () => {
-  const handleSignup = async credentials => {
+const SignupPage = ({username, password, firstname, lastname, email}) => {
+  const handleSignup = async (credentials) => {
+    if(!credentials){
+      console.log("no credentials provided")
+    }
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/signup`, {
         method: 'POST',
