@@ -1,0 +1,17 @@
+/* THIS IS TEMPORARY TO TRY THE HOOVER THING */
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #444;
+    list-style: none;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+    /* Ocultar el submenú por defecto */
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
