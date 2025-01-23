@@ -1,58 +1,84 @@
-import { useContext, useEffect, useState } from 'react'
-import { SessionContext } from '../contexts/SessionContext'
+import { useContext, useEffect, useState } from "react";
+import { SessionContext } from "../contexts/SessionContext";
 
-const AllBooksPage = () => {
-  const { token } = useContext(SessionContext)
+const AllBlogsPage = () => {
+  const { token } = useContext(SessionContext);
 
-  const [books, setBooks] = useState([])
+  const [blogs, setblogs] = useState([]);
 
-  const fetchAllBooks = async () => {
+  const fetchAllblogs = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books`)
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/blogs`);
       if (response.ok) {
-        const booksData = await response.json()
-        setBooks(booksData)
+        const blogsData = await response.json();
+        setblogs(blogsData);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchAllBooks()
-  }, [])
+    fetchAllblogs();
+  }, []);
 
-  const handleDelete = async currentBookId => {
+  const handleDelete = async (currentblogId) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books/${currentBookId}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/blogs/${currentblogId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (response.status === 204) {
-        fetchAllBooks()
+        fetchAllblogs();
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-
+  };
+  // const handleUpdate = async (currentblogId) => {
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_API_URL}/api/blogs/${currentblogId}`,
+  //       {
+  //         method: "PUT",
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     if (response.status === 204) {
+  //       fetchAllblogs();
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <>
-      <h1>All books</h1>
+      <h1>All blogs</h1>
       <ul>
-        {books.map(currentBook => (
-          <li key={currentBook._id}>
-            <p>{currentBook.title}</p>
-            <button type='button' onClick={() => handleDelete(currentBook._id)}>
+        {blogs.map((currentblog) => (
+          <li key={currentblog._id}>
+            <p>{currentblog.title}</p>
+            <button type="button" onClick={() => handleDelete(currentblog._id)}>
               Delete
             </button>
+            {/* <button
+              type="button"
+              onClick={() => navigate(`/blog/new/${currentblog._id}`)}
+            >
+              Edit
+            </button> */}
           </li>
         ))}
       </ul>
     </>
-  )
-}
+  );
+};
 
-export default AllBooksPage
+export default AllBlogsPage;

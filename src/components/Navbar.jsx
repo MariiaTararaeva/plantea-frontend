@@ -17,7 +17,7 @@ const Navbar = () => {
         {isAuthenticated ? (
           <>
             <li>
-              <Link to="/plans/new">Add a Book</Link>
+              <Link to="/blog/new">Add a Book</Link>
             </li>
             <li>
               <Link to="/profile">Profile</Link>

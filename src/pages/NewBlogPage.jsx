@@ -9,27 +9,30 @@ const NewBlogPage = () => {
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [pages, setPages] = useState(0);
+  const [content, setContent] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/blogs`,
+        `${import.meta.env.VITE_API_URL}/api/blogs/new`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ title, author, pages }),
+          body: JSON.stringify({ title, author, textContent: content }),
         }
       );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       if (response.status === 201) {
         navigate("/blogs");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -54,12 +57,11 @@ const NewBlogPage = () => {
           />
         </label>
         <label>
-          Number of pages
-          <input
+          Content
+          <textarea
             required
-            type="number"
-            value={pages}
-            onChange={(event) => setPages(event.target.value)}
+            value={content}
+            onChange={(event) => setContent(event.target.value)}
           />
         </label>
         <button type="submit">Add blog</button>
