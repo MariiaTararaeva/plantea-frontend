@@ -1,21 +1,21 @@
-import { Route, Routes } from 'react-router-dom'
-import SignupPage from './pages/SignupPage'
-import Navbar from './components/Navbar'
-import LoginPage from './pages/LoginPage'
-import ProfilePage from './pages/ProfilePage'
-import PrivateRoute from './components/PrivateRoute'
-import AnonymousRoute from './components/AnonymousRoute'
-import AllBooksPage from './pages/AllBooksPage'
-import NewBookPage from './pages/NewBookPage'
+import { Route, Routes } from "react-router-dom";
+import SignupPage from "./pages/SignupPage";
+import Navbar from "./components/Navbar";
+import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
+import PrivateRoute from "./components/PrivateRoute";
+import AnonymousRoute from "./components/AnonymousRoute";
+import AllBlogsPage from "./pages/AllBlogsPage";
+import NewBlogPage from "./pages/NewBlogPage";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path='/' element={<h1>Home page</h1>} />
+        <Route path="/" element={<h1>Home page</h1>} />
         <Route
-          path='/signup'
+          path="/signup"
           element={
             <AnonymousRoute>
               <SignupPage />
@@ -23,7 +23,7 @@ function App() {
           }
         />
         <Route
-          path='/login'
+          path="/login"
           element={
             <AnonymousRoute>
               <LoginPage />
@@ -31,28 +31,29 @@ function App() {
           }
         />
         <Route
-          path='/profile'
+          path="/profile"
           element={
             <PrivateRoute>
               <ProfilePage />
             </PrivateRoute>
           }
         />
+        <Route path="/users/:userId" element={<ProfilePage />} />
         <Route
-          path='/books/new'
+          path="/blog/new"
           element={
             <PrivateRoute>
-              <NewBookPage />
+              <NewBlogPage />
             </PrivateRoute>
           }
         />
 
-        <Route path='/books' element={<AllBooksPage />} />
+        <Route path="/blogs" element={<AllBlogsPage />} />
 
-        <Route path='*' element={<h1>404 Page</h1>} />
+        <Route path="*" element={<h1>404 Page</h1>} />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
