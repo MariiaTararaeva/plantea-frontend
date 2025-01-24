@@ -1,13 +1,14 @@
-import { Route, Routes } from 'react-router-dom'
-import SignupPage from './pages/SignupPage'
-import Navbar from './components/Navbar'
-import LoginPage from './pages/LoginPage'
-import ProfilePage from './pages/ProfilePage'
-import PrivateRoute from './components/PrivateRoute'
-import AnonymousRoute from './components/AnonymousRoute'
-import AllBooksPage from './pages/AllBooksPage'
-import NewBookPage from './pages/NewBookPage'
-import Sidebar from './components/Sidebar'
+import { Route, Routes } from "react-router-dom";
+import SignupPage from "./pages/SignupPage";
+import Navbar from "./components/Navbar";
+import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
+import PrivateRoute from "./components/PrivateRoute";
+import AnonymousRoute from "./components/AnonymousRoute";
+import AllBlogsPage from "./pages/AllBlogsPage";
+import NewBlogPage from "./pages/NewBlogPage";
+import Sidebar from "./components/Sidebar";
+
 
 function App() {
   return (
