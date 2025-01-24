@@ -7,7 +7,7 @@ const SessionContextProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  const [user, setUser] = useState(null); // 👈 Nuevo estado para almacenar los datos del usuario
+  const [user, setUser] = useState(null); // Setting the user tha's logged in
 
   const verifyToken = async (tokenToVerify) => {
     try {
