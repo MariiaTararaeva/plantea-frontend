@@ -7,6 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import AnonymousRoute from "./components/AnonymousRoute";
 import AllBlogsPage from "./pages/AllBlogsPage";
 import NewBlogPage from "./pages/NewBlogPage";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
