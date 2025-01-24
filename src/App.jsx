@@ -30,15 +30,7 @@ function App() {
             </AnonymousRoute>
           }
         />
-        <Route
-          path="/profile/{userId}"
-          element={
-            <PrivateRoute>
-              <ProfilePage />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/users/:userId" element={<ProfilePage />} />
+        <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route
           path="/blog/new"
           element={
