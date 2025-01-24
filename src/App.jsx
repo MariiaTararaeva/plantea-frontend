@@ -9,6 +9,7 @@ import AllBlogsPage from "./pages/AllBlogsPage";
 import NewBlogPage from "./pages/NewBlogPage";
 import Sidebar from "./components/Sidebar";
 
+
 function App() {
   return (
     <>
@@ -32,15 +33,7 @@ function App() {
             </AnonymousRoute>
           }
         />
-        <Route
-          path="/profile"
-          element={
-            <PrivateRoute>
-              <ProfilePage />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/users/:userId" element={<ProfilePage />} />
+        <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route
           path="/blog/new"
           element={
