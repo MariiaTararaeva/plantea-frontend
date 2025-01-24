@@ -7,11 +7,13 @@ import PrivateRoute from './components/PrivateRoute'
 import AnonymousRoute from './components/AnonymousRoute'
 import AllBooksPage from './pages/AllBooksPage'
 import NewBookPage from './pages/NewBookPage'
+import Sidebar from './components/Sidebar'
 
 function App() {
   return (
     <>
       <Navbar />
+      <Sidebar />
       <Routes>
         <Route path='/' element={<h1>Home page</h1>} />
         <Route

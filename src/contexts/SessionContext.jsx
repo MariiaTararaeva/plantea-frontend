@@ -7,26 +7,32 @@ const SessionContextProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  const verifyToken = async tokenToVerify => {
+  const [user, setUser] = useState(null); // 👈 Nuevo estado para almacenar los datos del usuario
+
+  const verifyToken = async (tokenToVerify) => {
     try {
+
       const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/verify`, {
-        headers: {
-          Authorization: `Bearer ${tokenToVerify}`,
-        },
-      })
+        headers: { Authorization: `Bearer ${tokenToVerify}` },
+      });
+
       if (response.ok) {
-        setToken(tokenToVerify)
-        setIsAuthenticated(true)
+        const userData = await response.json();
+
+        setToken(tokenToVerify);
+        setIsAuthenticated(true);
+        setUser(userData);
       } else {
-        localStorage.removeItem('authToken')
+        console.error("Verification  error:", response.status);
+        localStorage.removeItem("authToken");
       }
-      setIsLoading(false)
     } catch (error) {
-      console.log(error)
-      localStorage.removeItem('authToken')
-      setIsLoading(false)
+      console.error("Error:", error);
+      localStorage.removeItem("authToken");
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     if (token) {
@@ -54,7 +60,7 @@ const SessionContextProvider = ({ children }) => {
   }
 
   return (
-    <SessionContext.Provider value={{ token, setToken, isAuthenticated, isLoading, logout }}>
+    <SessionContext.Provider value={{ token, setToken, isAuthenticated, isLoading, user, setUser, logout }}>
       {children}
     </SessionContext.Provider>
   )
