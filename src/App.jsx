@@ -8,6 +8,7 @@ import AnonymousRoute from "./components/AnonymousRoute";
 import AllBlogsPage from "./pages/AllBlogsPage";
 import NewBlogPage from "./pages/NewBlogPage";
 import Sidebar from "./components/Sidebar";
+import BlogDetailsPage from "./pages/BlogDetailsPage";
 
 
 function App() {
@@ -44,6 +45,8 @@ function App() {
         />
 
         <Route path="/blogs" element={<AllBlogsPage />} />
+
+        <Route path="/blogs/:blogId" element={<BlogDetailsPage />} />
 
         <Route path="*" element={<h1>404 Page</h1>} />
       </Routes>
