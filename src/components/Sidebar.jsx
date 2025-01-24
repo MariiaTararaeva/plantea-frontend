@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { SessionContext } from "../contexts/SessionContext"; // Importamos el contexto
+import React, { useContext } from "react";
+import { SessionContext } from "../contexts/SessionContext";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
@@ -17,9 +17,9 @@ const Sidebar = () => {
                 <p>{user.name} {user.surname}</p>
                 <nav>
                     <ul>
-                        <li><Link to="/profile">Mi Perfil</Link></li>
-                        <li><Link to="/blogs">Mis Blogs</Link></li>
-                        <li><Link to="/comments">Mis Coments</Link></li>
+                        <li><Link to="/profile">My Profile</Link></li>
+                        <li><Link to="/blogs">My Posts</Link></li>
+                        <li><Link to="/comments">My comments</Link></li>
                         <li><Link to="/accsettings">Account settings</Link></li>
                     </ul>
                 </nav>
