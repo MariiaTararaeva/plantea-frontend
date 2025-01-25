@@ -36,7 +36,7 @@ function App() {
         />
         <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route
-          path="/blog/new"
+          path="/blogs/new"
           element={
             <PrivateRoute>
               <NewBlogPage />
