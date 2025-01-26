@@ -45,7 +45,6 @@ const NewBlogPage = () => {
     setSelectedSpecies({
       plantId: species._id, // MongoDB ObjectId
       name: species.common_name, // Common name of the plant
-      default_image: species.default_image
     });
         setSuggestions([]);
   };
@@ -149,30 +148,30 @@ const NewBlogPage = () => {
           </ul>
         )}
 
-        {selectedSpecies && (
-          <div>
-            <p>Selected Species: {selectedSpecies.common_name}</p>
-            {selectedSpecies.default_image?.thumbnail ? (
-              <img
-                src={selectedSpecies.default_image.thumbnail}
-                alt={selectedSpecies.common_name || "Selected Plant"}
-              />
-            ) : (
-              <div
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  backgroundColor: "#ccc",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                No Image
-              </div>
-            )}
-          </div>
-        )}
+{selectedSpecies && (
+  <div>
+    <p>Selected Species: {selectedSpecies.common_name}</p>
+    {selectedSpecies.default_image?.thumbnail ? (
+      <img
+        src={selectedSpecies.default_image.thumbnail}
+        alt={selectedSpecies.common_name || "Selected Plant"}
+      />
+    ) : (
+      <div
+        style={{
+          width: "100px",
+          height: "100px",
+          backgroundColor: "#ccc",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        No Image
+      </div>
+    )}
+  </div>
+)}
         <button type="submit">Add blog</button>
       </form>
     </>
