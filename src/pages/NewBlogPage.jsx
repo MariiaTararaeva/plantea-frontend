@@ -42,8 +42,11 @@ const NewBlogPage = () => {
   };
 
   const handleSelectSpecies = (species) => {
-    setSelectedSpecies(species);
-    setSuggestions([]);
+    setSelectedSpecies({
+      plantId: species._id, // MongoDB ObjectId
+      name: species.common_name, // Common name of the plant
+    });
+        setSuggestions([]);
   };
 
   const handleSubmit = async (event) => {
@@ -57,14 +60,17 @@ const NewBlogPage = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ title, author, textContent: content, tags, selectedSpecies }),
+          body: JSON.stringify({ title, author, textContent: content, tags,           selectedSpecies: selectedSpecies
+            ? { plantId: selectedSpecies.plantId, name: selectedSpecies.name }
+            : null}),
         }
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       if (response.status === 201) {
-        navigate("/blogs");
+        const responseBody = await response.json(); // Parse the response body as JSON
+        console.log("Response body:", responseBody); // Log the response body        navigate("/blogs");
       }
     } catch (error) {
       console.error(error);
