@@ -72,6 +72,7 @@ const NewBlogPage = () => {
       if (response.status === 201) {
         const responseBody = await response.json(); // Parse the response body as JSON
         console.log("Response body:", responseBody); // Log the response body        navigate("/blogs");
+        navigate(`/blogs`)
       }
     } catch (error) {
       console.error(error);

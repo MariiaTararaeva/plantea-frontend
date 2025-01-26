@@ -9,6 +9,7 @@ import AllBlogsPage from "./pages/AllBlogsPage";
 import NewBlogPage from "./pages/NewBlogPage";
 import Sidebar from "./components/Sidebar";
 import BlogDetailsPage from "./pages/BlogDetailsPage";
+import HomePage from "./components/HomePage";
 
 
 function App() {
@@ -17,7 +18,9 @@ function App() {
       <Navbar />
       <Sidebar />
       <Routes>
-        <Route path="/" element={<h1>Home page</h1>} />
+
+
+        <Route path="/" element={<HomePage />} />
         <Route
           path="/signup"
           element={
