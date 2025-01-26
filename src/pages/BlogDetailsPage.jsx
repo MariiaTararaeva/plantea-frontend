@@ -4,10 +4,13 @@ import CommentEntry from "../components/CommentEntry";
 
 const BlogDetailsPage = () => {
 
-    //Fetch the blog
     const { blogId } = useParams()
     const [blogEntry, setBlogEntry] = useState(null);
     const [newCommentEntry, setNewCommentEntry] = useState("");
+    const [comments, setComments] = useState([]);
+
+
+    //Fetch the blog
 
     async function fetchBlogEntry(blogId) {
         try {
@@ -15,7 +18,8 @@ const BlogDetailsPage = () => {
 
             if (response.ok) {
                 const blogEntryData = await response.json();
-                setBlogEntry(blogEntryData)
+                setBlogEntry(blogEntryData);
+                setComments(blogEntryData.comments);
             } else {
                 console.log("Error obtaining the blog entry")
             }
@@ -23,6 +27,7 @@ const BlogDetailsPage = () => {
             console.log(error);
         }
     }
+
     /* function to add comments */
 
     async function handleAddComment(event) {
@@ -53,6 +58,13 @@ const BlogDetailsPage = () => {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    /* function to delete a comment and not show it */
+
+    function onDeleteComment(commentId) {
+        const updatedCommentsArr = comments.filter(comment => comment._idd !== commentId);
+        setComments(updatedCommentsArr)
     }
 
     useEffect(() => {
@@ -93,7 +105,7 @@ const BlogDetailsPage = () => {
                 <button type="submit">Add Comment</button>
             </form>
             {blogEntry.comments.length > 0 ? (
-                blogEntry.comments.map(comment => <CommentEntry key={comment._id} comment={comment} />)
+                blogEntry.comments.map(comment => <CommentEntry key={comment._id} comment={comment} onDeleteComment={onDeleteComment} />)
             ) : (
                 <p>No comments yet.</p>
             )} </div>
