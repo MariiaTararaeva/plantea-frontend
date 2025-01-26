@@ -80,7 +80,7 @@ const BlogDetailsPage = () => {
             <div>
                 Where we display the images in case there are
             </div>
-            <p>{blogEntry.textContent} </p>
+            <p style={{ whiteSpace: "pre-line" }}>{blogEntry.textContent} </p>
         </div>
         <div className="commentSection">
             <h3>Comments</h3>
