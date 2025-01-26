@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
 import "../components/navbarStyling.css";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+
+const navigate = useNavigate();
+  
   const [plants, setPlants] = useState([]); // Random plants for homepage
   const [searchResults, setSearchResults] = useState([]); // Results from search
   const [searchQuery, setSearchQuery] = useState("");
+
+  const handlePlantClick = (plantId) => {
+    navigate(`/plants/${plantId}`);
+  };
 
   // Fetch 20 random plants from the database
   useEffect(() => {
@@ -63,7 +69,7 @@ const HomePage = () => {
               <h2>Search Results:</h2>
               <div className="plant-grid">
                 {searchResults.map((plant) => (
-                  <div key={plant._id} className="plant-card">
+                <div key={plant._id} className="plant-card" onClick={() => handlePlantClick(plant._id)}>
                     <img
                       src={plant.default_image?.thumbnail || "/placeholder.jpg"}
                       alt={plant.common_name || "Plant"}
@@ -81,7 +87,7 @@ const HomePage = () => {
             <h2>Explore Plants</h2>
             <div className="plant-grid">
               {plants.map((plant) => (
-                <div key={plant._id} className="plant-card">
+                <div key={plant._id} className="plant-card" onClick={() => handlePlantClick(plant._id)}>
                   <img
                     src={plant.default_image?.thumbnail || "/placeholder.jpg"}
                     alt={plant.common_name || "Plant"}
