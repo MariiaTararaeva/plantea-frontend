@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 
 const AllBlogsPage = () => {
   const { token } = useContext(SessionContext);
 
   const [blogs, setblogs] = useState([]);
-
+  const navigate = useNavigate();
   const fetchAllblogs = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/blogs`);
@@ -68,12 +69,13 @@ const AllBlogsPage = () => {
             <button type="button" onClick={() => handleDelete(currentblog._id)}>
               Delete
             </button>
-            {/* <button
+
+            <button
               type="button"
-              onClick={() => navigate(`/blog/new/${currentblog._id}`)}
+              onClick={() => navigate(`/blog/edit/${currentblog._id}`)}
             >
               Edit
-            </button> */}
+            </button>
           </li>
         ))}
       </ul>

@@ -1,62 +1,99 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { SessionContext } from "../contexts/SessionContext";
+import ProfileForm from "../components/ProfileForm";
 
 const ProfilePage = () => {
-  const { userId } = useParams();
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const { token } = useContext(SessionContext);
+  const [profileData, setProfileData] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
-    const fetchUserData = async () => {
-      setLoading(true);
-      setError(null);
+    const fetchProfile = async () => {
+      //I NEED ERIC TO HELP ME WITH THIS
+      if (!token) return; // If I remove this it will pop up an error twice ("Failed to fetch profile.") before successful fetch
 
       try {
-        const userResponse = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/${userId}`
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/users/profile`,
+          {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
-        if (!userResponse.ok) throw new Error("Failed to fetch user data");
-        const userData = await userResponse.json();
 
-        setUser(userData);
-      } catch (err) {
-        console.error(err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
+        if (response.ok) {
+          const data = await response.json();
+          setProfileData(data);
+        } else {
+          alert("Failed to fetch profile.");
+        }
+      } catch (error) {
+        console.error("Error fetching profile:", error);
       }
     };
 
-    fetchUserData();
-  }, [userId]);
+    fetchProfile();
+  }, [token]);
 
-  if (loading) return <div className="loading">Loading...</div>;
-  if (error) return <div className="error">{error}</div>;
-  if (!user) return <div className="error">User not found.</div>;
+  const handleSave = async (updatedData) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users/profile`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
+
+      if (response.ok) {
+        const updatedProfile = await response.json();
+        setProfileData(updatedProfile);
+        setIsEditing(false); // Exit edit mode
+        alert("Profile updated successfully!");
+      } else {
+        alert("Failed to update profile.");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+
+  if (!profileData) return <p>Loading...</p>;
 
   return (
-    <div className="user-profile">
-      <header className="user-header">
-        <img
-          src={user.avatar || ""}
-          alt={`${user.username || "User"}'s avatar`}
-          className="user-avatar"
-        />
-        <h1>{user.username || "Unknown User"}</h1>
-        <p>{user.bio || "No bio available."}</p>
-      </header>
-
-      <section className="user-stats">
+    <div>
+      {!isEditing ? (
         <div>
-          <strong>
-            {user.joinedDate
-              ? new Date(user.joinedDate).toLocaleDateString()
-              : "N/A"}
-          </strong>
-          <span>Joined</span>
+          <h1>
+            {profileData.firstName} {profileData.surname}
+          </h1>
+          <p>
+            <strong>Username:</strong> {profileData.username}
+          </p>
+          <p>
+            <strong>Email:</strong> {profileData.email}
+          </p>
+          <p>
+            <strong>Bio:</strong>{" "}
+            {profileData.bioDescription || "No bio provided."}
+          </p>
+          <p>
+            <strong>Greenhouse:</strong>{" "}
+            {profileData.greenhouse.join(", ") || "None"}
+          </p>
+          <button onClick={() => setIsEditing(true)}>Edit Profile</button>
         </div>
-      </section>
+      ) : (
+        //USE this logic for editing the blog page (NewBlogPage.jsx)
+        <ProfileForm
+          data={profileData}
+          onSave={handleSave}
+          onCancel={() => setIsEditing(false)}
+        />
+      )}
     </div>
   );
 };

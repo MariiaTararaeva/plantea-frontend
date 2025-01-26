@@ -1,35 +1,40 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
-import { useNavigate } from "react-router-dom";
+import BlogForm from "../components/BlogForm";
 
-const NewBlogPage = () => {
+const BlogPage = ({ blogData = null }) => {
   const navigate = useNavigate();
-
+  const { blogId } = useParams(); // For editing a specific blog
   const { token } = useContext(SessionContext);
-
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  console.log("TEST 1");
+  const handleSave = async (formData) => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/blogs/new`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ title, author, textContent: content }),
-        }
-      );
+      const url = blogData
+        ? `${import.meta.env.VITE_API_URL}/api/blogs/${blogId}` // Update existing blog
+        : `${import.meta.env.VITE_API_URL}/api/blogs/new`; // Create new blog
+
+      const method = blogData ? "PUT" : "POST"; // Determine the HTTP method
+
+      const response = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: formData.title,
+          author: formData.author,
+          textContent: formData.content,
+        }),
+      });
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      if (response.status === 201) {
-        navigate("/blogs");
+
+      if (response.status === 201 || response.status === 200) {
+        navigate("/blogs"); // Navigate back to the blog list
       }
     } catch (error) {
       console.error(error);
@@ -37,37 +42,11 @@ const NewBlogPage = () => {
   };
 
   return (
-    <>
-      <h1>New blog</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Title
-          <input
-            required
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
-        </label>
-        <label>
-          Author
-          <input
-            required
-            value={author}
-            onChange={(event) => setAuthor(event.target.value)}
-          />
-        </label>
-        <label>
-          Content
-          <textarea
-            required
-            value={content}
-            onChange={(event) => setContent(event.target.value)}
-          />
-        </label>
-        <button type="submit">Add blog</button>
-      </form>
-    </>
+    <div>
+      <h1>{blogData ? "Edit Blog" : "Create New Blog"}</h1>
+      <BlogForm blogData={blogData} onSave={handleSave} />
+    </div>
   );
 };
 
-export default NewBlogPage;
+export default BlogPage;
