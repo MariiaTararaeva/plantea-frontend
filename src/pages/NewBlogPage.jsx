@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
-import debounce from "lodash/debounce";
+//import debounce from "lodash/debounce";
 
 const NewBlogPage = () => {
   const navigate = useNavigate();
@@ -22,18 +22,18 @@ const NewBlogPage = () => {
 
     // Fetch matching species (replace with API call if necessary)
     if (query.length > 2) {
-      try{      
+      try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/plants?query=${query}`);
         if (response.ok) {
-        const matches = await response.json();
-            setSuggestions(matches);
+          const matches = await response.json();
+          setSuggestions(matches);
 
-        } else{
+        } else {
           console.log(response)
         }
-      } catch{
+      } catch {
         console.error("Error fetching species");
-        
+
       }
 
     } else {
@@ -46,7 +46,7 @@ const NewBlogPage = () => {
       plantId: species._id, // MongoDB ObjectId
       name: species.common_name, // Common name of the plant
     });
-        setSuggestions([]);
+    setSuggestions([]);
   };
 
   const handleSubmit = async (event) => {
@@ -60,9 +60,11 @@ const NewBlogPage = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ title, author, textContent: content, tags,           selectedSpecies: selectedSpecies
-            ? { plantId: selectedSpecies.plantId, name: selectedSpecies.name }
-            : null}),
+          body: JSON.stringify({
+            title, author, textContent: content, tags, selectedSpecies: selectedSpecies
+              ? { plantId: selectedSpecies.plantId, name: selectedSpecies.name }
+              : null
+          }),
         }
       );
       if (!response.ok) {
@@ -148,30 +150,30 @@ const NewBlogPage = () => {
           </ul>
         )}
 
-{selectedSpecies && (
-  <div>
-    <p>Selected Species: {selectedSpecies.common_name}</p>
-    {selectedSpecies.default_image?.thumbnail ? (
-      <img
-        src={selectedSpecies.default_image.thumbnail}
-        alt={selectedSpecies.common_name || "Selected Plant"}
-      />
-    ) : (
-      <div
-        style={{
-          width: "100px",
-          height: "100px",
-          backgroundColor: "#ccc",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        No Image
-      </div>
-    )}
-  </div>
-)}
+        {selectedSpecies && (
+          <div>
+            <p>Selected Species: {selectedSpecies.common_name}</p>
+            {selectedSpecies.default_image?.thumbnail ? (
+              <img
+                src={selectedSpecies.default_image.thumbnail}
+                alt={selectedSpecies.common_name || "Selected Plant"}
+              />
+            ) : (
+              <div
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  backgroundColor: "#ccc",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                No Image
+              </div>
+            )}
+          </div>
+        )}
         <button type="submit">Add blog</button>
       </form>
     </>

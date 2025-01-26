@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CommentEntry from "../components/CommentEntry";
 
 const BlogDetailsPage = () => {
 
     //Fetch the blog
     const { blogId } = useParams()
     const [blogEntry, setBlogEntry] = useState(null);
+    const [newCommentEntry, setNewCommentEntry] = useState("");
 
     async function fetchBlogEntry(blogId) {
         try {
@@ -19,6 +21,37 @@ const BlogDetailsPage = () => {
             }
         } catch (error) {
             console.log(error);
+        }
+    }
+    /* function to add comments */
+
+    async function handleAddComment(event) {
+
+        event.preventDefault();
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/comments`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                },
+                body: JSON.stringify({ blogPostId: blogId, content: newCommentEntry }),
+            })
+
+            if (response.ok) {
+
+                const addedComment = await response.json();
+
+                setBlogEntry((prev) => ({
+                    ...prev,
+                    comments: [addedComment, ...prev.comments], //adddding the last comment first  I think
+                }));
+                setNewCommentEntry("");
+            } else { console.log("Error adding the comment") }
+
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -43,16 +76,24 @@ const BlogDetailsPage = () => {
         </div>
         <div className="blogContent">
             <h1>{blogEntry.title} </h1>
-            <p>created by {blogEntry.userId.username} at (ADD THE DATE)</p>
+            <p>created by {blogEntry.userId.username} - {new Date(blogEntry.createdAt).toLocaleString('es-ES')}</p>
             <div>
                 Where we display the images in case there are
             </div>
-            <p>a paragraph for the descriptions</p>
+            <p>{blogEntry.textContent} </p>
         </div>
         <div className="commentSection">
             <h3>Comments</h3>
+            <form onSubmit={handleAddComment}>
+                <textarea
+                    value={newCommentEntry}
+                    onChange={(event) => setNewCommentEntry(event.target.value)}
+                    placeholder="Write your comment here..."
+                />
+                <button type="submit">Add Comment</button>
+            </form>
             {blogEntry.comments.length > 0 ? (
-                blogEntry.comments.map(comment => <Comment key={comment._id} comment={comment} />)
+                blogEntry.comments.map(comment => <CommentEntry key={comment._id} comment={comment} />)
             ) : (
                 <p>No comments yet.</p>
             )} </div>
