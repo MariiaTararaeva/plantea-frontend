@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 const BlogForm = ({ blogData = null, onSave }) => {
   const [formData, setFormData] = useState({
     title: "",
-    content: "",
+    textContent: "",
   });
 
   useEffect(() => {
     if (blogData) {
       setFormData({
         title: blogData.title || "",
-        content: blogData.textContent || "",
+        textContent: blogData.textContent || "",
       });
     }
   }, [blogData]);
@@ -20,12 +20,14 @@ const BlogForm = ({ blogData = null, onSave }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSave(formData);
+    try {
+      await onSave(formData); // Await the async onSave function
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+    }
   };
-
-  const buttonText = blogData ? "Update Blog" : "Create Blog";
 
   return (
     <form onSubmit={handleSubmit}>
@@ -41,13 +43,13 @@ const BlogForm = ({ blogData = null, onSave }) => {
       <label>
         Content
         <textarea
-          name="content"
+          name="textContent"
           required
-          value={formData.content}
+          value={formData.textContent}
           onChange={handleInputChange}
         />
       </label>
-      <button type="submit">{buttonText}</button>
+      <button type="submit">{blogData ? "Update Blog" : "Create Blog"}</button>
     </form>
   );
 };

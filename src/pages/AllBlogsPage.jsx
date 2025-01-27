@@ -1,85 +1,72 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 
 const AllBlogsPage = () => {
+  const [blogs, setBlogs] = useState([]);
+  const navigate = useNavigate();
   const { token } = useContext(SessionContext);
 
-  const [blogs, setblogs] = useState([]);
-  const navigate = useNavigate();
-  const fetchAllblogs = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/blogs`);
-      if (response.ok) {
-        const blogsData = await response.json();
-        setblogs(blogsData);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    fetchAllblogs();
+    const fetchAllBlogs = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/blogs`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setBlogs(data);
+        } else {
+          console.error("Failed to fetch blogs");
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
+    fetchAllBlogs();
   }, []);
 
-  const handleDelete = async (currentblogId) => {
+  const handleDelete = async (blogId) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/blogs/${currentblogId}`,
+        `${import.meta.env.VITE_API_URL}/api/blogs/${blogId}`,
         {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
-      if (response.status === 204) {
-        fetchAllblogs();
+      if (response.ok) {
+        setBlogs((prev) => prev.filter((blog) => blog._id !== blogId));
+      } else {
+        console.error("Failed to delete blog");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error deleting blog:", error);
     }
   };
-  // const handleUpdate = async (currentblogId) => {
-  //   try {
-  //     const response = await fetch(
-  //       `${import.meta.env.VITE_API_URL}/api/blogs/${currentblogId}`,
-  //       {
-  //         method: "PUT",
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     if (response.status === 204) {
-  //       fetchAllblogs();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  return (
-    <>
-      <h1>All blogs</h1>
-      <ul>
-        {blogs.map((currentblog) => (
-          <li key={currentblog._id}>
-            <p>{currentblog.title}</p>
-            <button type="button" onClick={() => handleDelete(currentblog._id)}>
-              Delete
-            </button>
 
-            <button
-              type="button"
-              onClick={() => navigate(`/blog/edit/${currentblog._id}`)}
-            >
-              Edit
+  return (
+    <div>
+      <h1>All Blogs</h1>
+      <ul>
+        {blogs.map((blog) => (
+          <li key={blog._id}>
+            <h2>{blog.title}</h2>
+            <button onClick={() => navigate(`/blogs/${blog._id}`)}>
+              View Details
             </button>
+            <button onClick={() => navigate(`/blog/edit/${blog._id}`)}>
+              Edit Blog
+            </button>
+            <button onClick={() => handleDelete(blog._id)}>Delete Blog</button>
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
