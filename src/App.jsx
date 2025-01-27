@@ -9,7 +9,8 @@ import AllBlogsPage from "./pages/AllBlogsPage";
 import NewBlogPage from "./pages/NewBlogPage";
 import Sidebar from "./components/Sidebar";
 import BlogDetailsPage from "./pages/BlogDetailsPage";
-import HomePage from "./components/HomePage";
+import HomePage from "./pages/HomePage";
+import PlantDetailsPage from "./pages/PlantDetailsPage";
 
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
 
 
         <Route path="/" element={<HomePage />} />
+        <Route path="/plants/:plantId" element={<PlantDetailsPage />} />
+
         <Route
           path="/signup"
           element={
