@@ -9,6 +9,8 @@ import AllBlogsPage from "./pages/AllBlogsPage";
 import NewBlogPage from "./pages/NewBlogPage";
 import Sidebar from "./components/Sidebar";
 import BlogDetailsPage from "./pages/BlogDetailsPage";
+import HomePage from "./pages/HomePage";
+import PlantDetailsPage from "./pages/PlantDetailsPage";
 
 
 function App() {
@@ -17,7 +19,11 @@ function App() {
       <Navbar />
       <Sidebar />
       <Routes>
-        <Route path="/" element={<h1>Home page</h1>} />
+
+
+        <Route path="/" element={<HomePage />} />
+        <Route path="/plants/:plantId" element={<PlantDetailsPage />} />
+
         <Route
           path="/signup"
           element={
@@ -36,7 +42,7 @@ function App() {
         />
         <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route
-          path="/blog/new"
+          path="/blogs/new"
           element={
             <PrivateRoute>
               <NewBlogPage />
