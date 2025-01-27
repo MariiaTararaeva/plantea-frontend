@@ -9,7 +9,7 @@ import AllBlogsPage from "./pages/AllBlogsPage";
 import NewBlogPage from "./pages/NewBlogPage";
 import Sidebar from "./components/Sidebar";
 import BlogDetailsPage from "./pages/BlogDetailsPage";
-import HomePage from "./components/HomePage";
+import HomePage from "./pages/HomePage";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
 
 
