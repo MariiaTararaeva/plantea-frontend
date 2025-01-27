@@ -178,6 +178,72 @@ const NewBlogPage = () => {
             )}
           </div>
         )}
+        <label>
+          Tags:
+          <input
+            type="text"
+            value={tags}
+            onChange={handleTagChange}
+            placeholder="Enter tags"
+          />
+        </label>
+
+        {suggestions.length > 0 && (
+          <ul className="dropdown">
+            {suggestions.map((species) => (
+              <li
+                key={species._id}
+                onClick={() => handleSelectSpecies(species)}
+                className="dropdown-item"
+              >
+                {species.default_image?.thumbnail ? (
+                  <img
+                    src={species.default_image.thumbnail}
+                    alt={species.common_name || "Plant Image"}
+                    style={{ width: "50px", marginRight: "10px" }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      marginRight: "10px",
+                      backgroundColor: "#ccc",
+                    }}
+                  >
+                    No Image
+                  </div>
+                )}
+                {species.common_name}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {selectedSpecies && (
+          <div>
+            <p>Selected Species: {selectedSpecies.name}</p>
+            {selectedSpecies.default_image?.thumbnail ? (
+              <img
+                src={selectedSpecies.default_image.thumbnail}
+                alt={selectedSpecies.common_name || "Selected Plant"}
+              />
+            ) : (
+              <div
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  backgroundColor: "#ccc",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                No Image
+              </div>
+            )}
+          </div>
+        )}
         <button type="submit">Add blog</button>
       </form>
     </>

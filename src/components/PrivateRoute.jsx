@@ -3,7 +3,10 @@ import { SessionContext } from '../contexts/SessionContext'
 import { Navigate } from 'react-router-dom'
 
 const PrivateRoute = ({ children }) => {
-  const { isAuthenticated, isLoading } = useContext(SessionContext)
+  const { isAuthenticated, isLoading, token } = useContext(SessionContext)
+  if (!token) {
+    return <Navigate to='/login' />
+  }
 
   if (isLoading) {
     return <h2>Loading...</h2>
