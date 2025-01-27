@@ -46,9 +46,12 @@ const PlantDetailsPage = () => {
           />
           <p><strong>Scientific Name:</strong> {plant.scientific_name}</p>
           <p><strong>Common Name:</strong> {plant.common_name}</p>
-          <p><strong>Description:</strong> {plant.description || "No description available."}</p>
-          <p><strong>Category:</strong> {plant.category || "Unknown"}</p>
-          {/* Add more plant details as needed */}
+          <p><strong>Watering:</strong> {plant.watering || "No description available."}</p>
+          <p><strong>Sunlight:</strong>{" "}
+        {Array.isArray(plant.sunlight) && plant.sunlight.length > 1
+            ? plant.sunlight.join(", ")
+            : plant.sunlight || "Unknown"}
+        </p>
         </div>
 
   );
