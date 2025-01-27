@@ -1,10 +1,10 @@
 import { useState } from "react";
 /* eslint-disable react/prop-types */
-const AuthForm = ({ submitCallback, isSignup = false }) => {
+const AuthForm = ({ submitCallback, isSignup }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    ...(isSignup && { email: "" }),
+    ...(isSignup && { email: "", firstName: "", surname: "" }),
   });
 
   const handleInputChange = (e) => {
@@ -39,16 +39,36 @@ const AuthForm = ({ submitCallback, isSignup = false }) => {
         />
       </label>
       {isSignup && (
-        <label>
-          Email:
-          <input
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
+        <div>
+          <label>
+            Email:
+            <input
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+          <label>
+            First Name:
+            <input
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+          <label>
+            Last Name:
+            <input
+              name="surname"
+              value={formData.surname}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+        </div>
       )}
       <button type="submit">{isSignup ? "Sign Up" : "Log In"}</button>
     </form>

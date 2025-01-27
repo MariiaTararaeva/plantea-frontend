@@ -25,6 +25,7 @@ const SignupPage = () => {
     <div>
       <h1>Sign Up</h1>
       <AuthForm
+        isSignup={true}
         submitCallback={handleSignup}
         fields={[
           { name: "username", label: "Username", required: true },
