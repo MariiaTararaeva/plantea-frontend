@@ -45,6 +45,7 @@ const NewBlogPage = () => {
     setSelectedSpecies({
       plantId: species._id, // MongoDB ObjectId
       name: species.common_name, // Common name of the plant
+      default_image: species.default_image
     });
         setSuggestions([]);
   };
@@ -150,7 +151,7 @@ const NewBlogPage = () => {
 
 {selectedSpecies && (
   <div>
-    <p>Selected Species: {selectedSpecies.common_name}</p>
+    <p>Selected Species: {selectedSpecies.name}</p>
     {selectedSpecies.default_image?.thumbnail ? (
       <img
         src={selectedSpecies.default_image.thumbnail}
