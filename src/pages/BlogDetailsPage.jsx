@@ -48,7 +48,7 @@ const BlogDetailsPage = () => {
 
                 const addedComment = await response.json();
 
-                setComments((prevComments) => [addedComment, ...prevComments]);  //adddding the last comment first  I think
+                setComments((prevComments) => [addedComment, ...prevComments]);  //adding the last comment first I think
 
                 setNewCommentEntry("");
 
@@ -65,6 +65,16 @@ const BlogDetailsPage = () => {
         setComments((prevComments) => {
             return prevComments.filter(comment => comment._id !== commentId);
         });
+    }
+
+
+    /* function to update a comment */
+    function onUpdateComment(updatedComment) {
+        setComments((prevComments) =>
+            prevComments.map((comment) =>
+                comment._id === updatedComment._id ? updatedComment : comment
+            )
+        );
     }
 
     useEffect(() => {
@@ -106,7 +116,7 @@ const BlogDetailsPage = () => {
             </form>
             {comments.length > 0 ? (
                 comments.map(comment => (
-                    <CommentEntry key={comment._id} comment={comment} onDeleteComment={onDeleteComment} />
+                    <CommentEntry key={comment._id} comment={comment} onDeleteComment={onDeleteComment} onUpdateComment={onUpdateComment} />
                 ))
             ) : (
                 <p>No comments yet.</p>

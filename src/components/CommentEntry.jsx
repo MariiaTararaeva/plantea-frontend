@@ -1,9 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 
-const CommentEntry = ({ comment, onDeleteComment }) => {
+const CommentEntry = ({ comment, onDeleteComment, onUpdateComment }) => {
 
     const { user } = useContext(SessionContext);
+
+    /* states for  editing a comment */
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedContent, setEditedContent] = useState(comment.content);
+
 
     async function handleDeleteComment(params) {
         try {
@@ -25,18 +30,62 @@ const CommentEntry = ({ comment, onDeleteComment }) => {
         }
     }
 
+    /* edit comment  function */
+    async function handleEditComment() {
+        try {
+            const updatedData = {
+                content: editedContent // Only snedding the edidted conntent
+            };
 
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/comments/${comment._id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                },
+                body: JSON.stringify(updatedData),
+            });
+
+            if (response.ok) {
+                const updatedComment = await response.json();
+                console.log("Updated comment from API:", updatedComment);
+                onUpdateComment(updatedComment);
+                setIsEditing(false);
+            } else {
+                console.log("Error updating comment");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div className="comment">
             <img src={comment.userId.profilePicture} alt={`${comment.userId.username} profile`} width="40px" />
             <div className="comment-content">
                 <p><strong>{comment.userId.username}</strong> - {new Date(comment.createdAt).toLocaleString('es-ES')}</p>
-                <p style={{ whiteSpace: "pre-line" }}>{comment.content}</p>
-                {user?._id === comment.userId._id && (
+
+                {isEditing ? (
+                    <>
+                        <textarea
+                            value={editedContent}
+                            onChange={(event) => setEditedContent(event.target.value)}
+                        />
+                        <button onClick={handleEditComment}>Save</button>
+                        <button onClick={() => setIsEditing(false)}>Cancel</button>
+                    </>
+                ) : (
+                    <p style={{ whiteSpace: "pre-line" }}>{comment.content}</p>
+                )}
+
+                {user?._id === comment.userId._id && (<>
+                    <button onClick={() => setIsEditing(true)}>
+                        Edit
+                    </button>
                     <button type="button" onClick={handleDeleteComment} >
                         Delete comment
                     </button>
+                </>
                 )}
             </div>
         </div>
