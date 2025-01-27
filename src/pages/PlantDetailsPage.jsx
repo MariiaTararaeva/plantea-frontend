@@ -36,10 +36,7 @@ const PlantDetailsPage = () => {
   }
 
   return (
-    <div className="plant-details-container">
-      <Navbar />
-      <div className="content-container">
-        <Sidebar />
+
         <div className="main-content">
           <h1>{plant.common_name || plant.scientific_name}</h1>
           <img
@@ -53,8 +50,7 @@ const PlantDetailsPage = () => {
           <p><strong>Category:</strong> {plant.category || "Unknown"}</p>
           {/* Add more plant details as needed */}
         </div>
-      </div>
-    </div>
+
   );
 };
 
