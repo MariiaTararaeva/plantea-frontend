@@ -48,7 +48,7 @@ const CommentEntry = ({ comment, onDeleteComment, onUpdateComment }) => {
 
             if (response.ok) {
                 const updatedComment = await response.json();
-                console.log("Updated comment from API:", updatedComment);
+
                 onUpdateComment(updatedComment);
                 setIsEditing(false);
             } else {
@@ -78,7 +78,7 @@ const CommentEntry = ({ comment, onDeleteComment, onUpdateComment }) => {
                     <p style={{ whiteSpace: "pre-line" }}>{comment.content}</p>
                 )}
 
-                {user?._id === comment.userId._id && (<>
+                {!isEditing && user?._id === comment.userId._id && (<>
                     <button onClick={() => setIsEditing(true)}>
                         Edit
                     </button>
