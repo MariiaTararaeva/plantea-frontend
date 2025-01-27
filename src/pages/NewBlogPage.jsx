@@ -30,7 +30,6 @@ const BlogPage = () => {
           setLoading(false);
         }
       };
-
       fetchBlog();
     }
   }, [blogId]);
@@ -40,6 +39,7 @@ const BlogPage = () => {
       ? `${import.meta.env.VITE_API_URL}/api/blogs/${blogId}`
       : `${import.meta.env.VITE_API_URL}/api/blogs/new`;
     const method = blogId ? "PUT" : "POST";
+
     try {
       setLoading(true);
       const response = await fetch(url, {
