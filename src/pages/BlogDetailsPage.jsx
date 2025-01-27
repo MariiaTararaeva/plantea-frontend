@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CommentEntry from "../components/CommentEntry";
 
 const BlogDetailsPage = () => {
 
-    //Fetch the blog
     const { blogId } = useParams()
     const [blogEntry, setBlogEntry] = useState(null);
+    const [newCommentEntry, setNewCommentEntry] = useState("");
+    const [comments, setComments] = useState([]);
+
+
+    //Fetch the blog
 
     async function fetchBlogEntry(blogId) {
         try {
@@ -13,13 +18,63 @@ const BlogDetailsPage = () => {
 
             if (response.ok) {
                 const blogEntryData = await response.json();
-                setBlogEntry(blogEntryData)
+                setBlogEntry(blogEntryData);
+                setComments(blogEntryData.comments);
             } else {
                 console.log("Error obtaining the blog entry")
             }
         } catch (error) {
             console.log(error);
         }
+    }
+
+    /* function to add comments */
+
+    async function handleAddComment(event) {
+
+        event.preventDefault();
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/comments`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                },
+                body: JSON.stringify({ blogPostId: blogId, content: newCommentEntry }),
+            })
+
+            if (response.ok) {
+
+                const addedComment = await response.json();
+
+                setComments((prevComments) => [addedComment, ...prevComments]);  //adding the last comment first I think
+
+                setNewCommentEntry("");
+
+            } else { console.log("Error adding the comment") }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    /* function to delete a comment and not show it */
+
+    function onDeleteComment(commentId) {
+        setComments((prevComments) => {
+            return prevComments.filter(comment => comment._id !== commentId);
+        });
+    }
+
+
+    /* function to update a comment */
+    function onUpdateComment(updatedComment) {
+        setComments((prevComments) =>
+            prevComments.map((comment) =>
+                comment._id === updatedComment._id ? updatedComment : comment
+            )
+        );
     }
 
     useEffect(() => {
@@ -43,16 +98,26 @@ const BlogDetailsPage = () => {
         </div>
         <div className="blogContent">
             <h1>{blogEntry.title} </h1>
-            <p>created by {blogEntry.userId.username} at (ADD THE DATE)</p>
+            <p>created by {blogEntry.userId.username} - {new Date(blogEntry.createdAt).toLocaleString('es-ES')}</p>
             <div>
                 Where we display the images in case there are
             </div>
-            <p>a paragraph for the descriptions</p>
+            <p style={{ whiteSpace: "pre-line" }}>{blogEntry.textContent} </p>
         </div>
         <div className="commentSection">
             <h3>Comments</h3>
-            {blogEntry.comments.length > 0 ? (
-                blogEntry.comments.map(comment => <Comment key={comment._id} comment={comment} />)
+            <form onSubmit={handleAddComment}>
+                <textarea
+                    value={newCommentEntry}
+                    onChange={(event) => setNewCommentEntry(event.target.value)}
+                    placeholder="Write your comment here..."
+                />
+                <button type="submit">Add Comment</button>
+            </form>
+            {comments.length > 0 ? (
+                comments.map(comment => (
+                    <CommentEntry key={comment._id} comment={comment} onDeleteComment={onDeleteComment} onUpdateComment={onUpdateComment} />
+                ))
             ) : (
                 <p>No comments yet.</p>
             )} </div>
