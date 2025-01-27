@@ -48,11 +48,10 @@ const BlogDetailsPage = () => {
 
                 const addedComment = await response.json();
 
-                setBlogEntry((prev) => ({
-                    ...prev,
-                    comments: [addedComment, ...prev.comments], //adddding the last comment first  I think
-                }));
+                setComments((prevComments) => [addedComment, ...prevComments]);  //adddding the last comment first  I think
+
                 setNewCommentEntry("");
+
             } else { console.log("Error adding the comment") }
 
         } catch (error) {
@@ -63,8 +62,9 @@ const BlogDetailsPage = () => {
     /* function to delete a comment and not show it */
 
     function onDeleteComment(commentId) {
-        const updatedCommentsArr = comments.filter(comment => comment._idd !== commentId);
-        setComments(updatedCommentsArr)
+        setComments((prevComments) => {
+            return prevComments.filter(comment => comment._id !== commentId);
+        });
     }
 
     useEffect(() => {
@@ -104,8 +104,10 @@ const BlogDetailsPage = () => {
                 />
                 <button type="submit">Add Comment</button>
             </form>
-            {blogEntry.comments.length > 0 ? (
-                blogEntry.comments.map(comment => <CommentEntry key={comment._id} comment={comment} onDeleteComment={onDeleteComment} />)
+            {comments.length > 0 ? (
+                comments.map(comment => (
+                    <CommentEntry key={comment._id} comment={comment} onDeleteComment={onDeleteComment} />
+                ))
             ) : (
                 <p>No comments yet.</p>
             )} </div>
