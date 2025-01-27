@@ -1,62 +1,58 @@
-import { useState } from 'react'
+import { useState } from "react";
+/* eslint-disable react/prop-types */
+const AuthForm = ({ submitCallback, isSignup = false }) => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    ...(isSignup && { email: "" }),
+  });
 
-const AuthForm = ({ submitCallback }) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [firstName, setFirstname] = useState('')
-  const [surname, setLastname] = useState('')
-  const [email, setEmail] = useState('')
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleSubmit = event => {
-    event.preventDefault()
-    submitCallback({ username, password, firstName, surname, email }) 
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitCallback(formData);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Username
-        <input required value={username} onChange={event => setUsername(event.target.value)} />
-      </label>
-      <label>
-        Password
+        Username:
         <input
-          type='password'
+          name="username"
+          value={formData.username}
+          onChange={handleInputChange}
           required
-          value={password}
-          onChange={event => setPassword(event.target.value)}
         />
       </label>
       <label>
-        First Name
+        Password:
         <input
-          type='firstName'
+          name="password"
+          type="password"
+          value={formData.password}
+          onChange={handleInputChange}
           required
-          value={firstName}
-          onChange={event => setFirstname(event.target.value)}
         />
       </label>
-      <label>
-        Last Name
-        <input
-          type='surname'
-          required
-          value={surname}
-          onChange={event => setLastname(event.target.value)}
-        />
-      </label>
-      <label>
-        Email
-        <input
-          type='email'
-          required
-          value={email}
-          onChange={event => setEmail(event.target.value)}
-        />
-      </label>
-      <button type='submit'>SignUp</button>
+      {isSignup && (
+        <label>
+          Email:
+          <input
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+      )}
+      <button type="submit">{isSignup ? "Sign Up" : "Log In"}</button>
     </form>
-  )
-}
+  );
+};
 
-export default AuthForm
+export default AuthForm;

@@ -1,32 +1,47 @@
-import AuthForm from '../components/AuthForm'
+import AuthForm from "../components/AuthForm";
 
-const SignupPage = ({username, password, firstname, lastname, email}) => {
+const SignupPage = () => {
   const handleSignup = async (credentials) => {
-    if(!credentials){
-      console.log("no credentials provided")
-    }
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/signup`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials),
-      })
-      if (response.status === 201) {
-        console.log('User created')
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/signup`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(credentials),
+        }
+      );
+      if (response.ok) {
+        alert("User created successfully!");
+      } else {
+        alert("Failed to sign up.");
       }
     } catch (error) {
-      console.log(error)
+      console.error("Error signing up:", error);
     }
-  }
+  };
 
   return (
-    <>
+    <div>
       <h1>Sign Up</h1>
-      <AuthForm submitCallback={handleSignup} />
-    </>
-  )
-}
+      <AuthForm
+        submitCallback={handleSignup}
+        fields={[
+          { name: "username", label: "Username", required: true },
+          {
+            name: "password",
+            label: "Password",
+            type: "password",
+            required: true,
+          },
+          { name: "firstName", label: "First Name", required: true },
+          { name: "surname", label: "Last Name", required: true },
+          { name: "email", label: "Email", type: "email", required: true },
+        ]}
+        buttonLabel="Sign Up"
+      />
+    </div>
+  );
+};
 
-export default SignupPage
+export default SignupPage;

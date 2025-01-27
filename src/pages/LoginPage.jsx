@@ -30,7 +30,19 @@ const LoginPage = () => {
   return (
     <>
       <h1>Login</h1>
-      <AuthForm submitCallback={handleLogin} />
+      <AuthForm
+        submitCallback={handleLogin}
+        fields={[
+          { name: "username", label: "Username", required: true },
+          {
+            name: "password",
+            label: "Password",
+            type: "password",
+            required: true,
+          },
+        ]}
+        buttonLabel="Log In"
+      />
     </>
   );
 };

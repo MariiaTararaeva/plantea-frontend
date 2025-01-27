@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
-//import debounce from "lodash/debounce";
+import debounce from "lodash/debounce";
 
 const NewBlogPage = () => {
   const navigate = useNavigate();
@@ -23,19 +23,18 @@ const NewBlogPage = () => {
     // Fetch matching species (replace with API call if necessary)
     if (query.length > 2) {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/plants?query=${query}`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/plants?query=${query}`
+        );
         if (response.ok) {
           const matches = await response.json();
           setSuggestions(matches);
-
         } else {
-          console.log(response)
+          console.log(response);
         }
       } catch {
         console.error("Error fetching species");
-
       }
-
     } else {
       setSuggestions([]);
     }
@@ -45,7 +44,7 @@ const NewBlogPage = () => {
     setSelectedSpecies({
       plantId: species._id, // MongoDB ObjectId
       name: species.common_name, // Common name of the plant
-      default_image: species.default_image
+      default_image: species.default_image,
     });
     setSuggestions([]);
   };
@@ -62,9 +61,13 @@ const NewBlogPage = () => {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            title, author, textContent: content, tags, selectedSpecies: selectedSpecies
+            title,
+            author,
+            textContent: content,
+            tags,
+            selectedSpecies: selectedSpecies
               ? { plantId: selectedSpecies.plantId, name: selectedSpecies.name }
-              : null
+              : null,
           }),
         }
       );
@@ -74,7 +77,7 @@ const NewBlogPage = () => {
       if (response.status === 201) {
         const responseBody = await response.json(); // Parse the response body as JSON
         console.log("Response body:", responseBody); // Log the response body        navigate("/blogs");
-        navigate(`/blogs`)
+        navigate(`/blogs`);
       }
     } catch (error) {
       console.error(error);
@@ -175,6 +178,72 @@ const NewBlogPage = () => {
             )}
           </div>
         )}
+        <label>
+          Tags:
+          <input
+            type="text"
+            value={tags}
+            onChange={handleTagChange}
+            placeholder="Enter tags"
+          />
+        </label>
+
+        {suggestions.length > 0 && (
+          <ul className="dropdown">
+            {suggestions.map((species) => (
+              <li
+                key={species._id}
+                onClick={() => handleSelectSpecies(species)}
+                className="dropdown-item"
+              >
+                {species.default_image?.thumbnail ? (
+                  <img
+                    src={species.default_image.thumbnail}
+                    alt={species.common_name || "Plant Image"}
+                    style={{ width: "50px", marginRight: "10px" }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      marginRight: "10px",
+                      backgroundColor: "#ccc",
+                    }}
+                  >
+                    No Image
+                  </div>
+                )}
+                {species.common_name}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {selectedSpecies && (
+          <div>
+            <p>Selected Species: {selectedSpecies.name}</p>
+            {selectedSpecies.default_image?.thumbnail ? (
+              <img
+                src={selectedSpecies.default_image.thumbnail}
+                alt={selectedSpecies.common_name || "Selected Plant"}
+              />
+            ) : (
+              <div
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  backgroundColor: "#ccc",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                No Image
+              </div>
+            )}
+          </div>
+        )}
         <button type="submit">Add blog</button>
       </form>
     </>
@@ -182,3 +251,80 @@ const NewBlogPage = () => {
 };
 
 export default NewBlogPage;
+
+// import { useEffect, useState, useContext } from "react";
+// import { useParams, useNavigate } from "react-router-dom";
+// import { SessionContext } from "../contexts/SessionContext";
+// import BlogForm from "../components/BlogForm";
+
+// const BlogPage = () => {
+//   const { token } = useContext(SessionContext);
+//   const { blogId } = useParams();
+//   const navigate = useNavigate();
+//   const [blogData, setBlogData] = useState(null);
+//   const [loading, setLoading] = useState(false);
+
+//   useEffect(() => {
+//     if (blogId) {
+//       const fetchBlog = async () => {
+//         setLoading(true);
+//         try {
+//           const response = await fetch(
+//             `${import.meta.env.VITE_API_URL}/api/blogs/${blogId}`
+//           );
+//           if (response.ok) {
+//             const data = await response.json();
+//             setBlogData(data);
+//           } else {
+//             console.error("Failed to fetch blog");
+//           }
+//         } catch (error) {
+//           console.error("Error fetching blog:", error);
+//         } finally {
+//           setLoading(false);
+//         }
+//       };
+//       fetchBlog();
+//     }
+//   }, [blogId]);
+
+//   const handleSave = async (formData) => {
+//     const url = blogId
+//       ? `${import.meta.env.VITE_API_URL}/api/blogs/${blogId}`
+//       : `${import.meta.env.VITE_API_URL}/api/blogs/new`;
+//     const method = blogId ? "PUT" : "POST";
+
+//     try {
+//       setLoading(true);
+//       const response = await fetch(url, {
+//         method,
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(formData),
+//       });
+
+//       if (response.ok) {
+//         navigate("/blogs");
+//       } else {
+//         console.error("Failed to save blog", response);
+//       }
+//     } catch (error) {
+//       console.error("Error saving blog:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   if (loading) return <p>Loading...</p>;
+
+//   return (
+//     <div>
+//       <h1>{blogId ? "Edit Blog" : "Create New Blog"}</h1>
+//       <BlogForm blogData={blogData} onSave={handleSave} />
+//     </div>
+//   );
+// };
+
+// export default BlogPage;

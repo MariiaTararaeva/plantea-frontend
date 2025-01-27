@@ -12,15 +12,12 @@ import BlogDetailsPage from "./pages/BlogDetailsPage";
 import HomePage from "./pages/HomePage";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
 
-
 function App() {
   return (
     <>
       <Navbar />
       <Sidebar />
       <Routes>
-
-
         <Route path="/" element={<HomePage />} />
         <Route path="/plants/:plantId" element={<PlantDetailsPage />} />
 
@@ -40,7 +37,8 @@ function App() {
             </AnonymousRoute>
           }
         />
-        <Route path="/profile/:userId" element={<ProfilePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+
         <Route
           path="/blogs/new"
           element={
@@ -53,6 +51,7 @@ function App() {
         <Route path="/blogs" element={<AllBlogsPage />} />
 
         <Route path="/blogs/:blogId" element={<BlogDetailsPage />} />
+        <Route path="/blog/edit/:blogId" element={<NewBlogPage />} />
 
         <Route path="*" element={<h1>404 Page</h1>} />
       </Routes>
