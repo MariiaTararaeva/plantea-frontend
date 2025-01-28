@@ -5,7 +5,9 @@ import { SessionContext } from "../contexts/SessionContext";
 const AllBlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
-  const { token } = useContext(SessionContext);
+
+  //Changed
+  const { token, user } = useContext(SessionContext);
 
   useEffect(() => {
     const fetchAllBlogs = async () => {
@@ -59,10 +61,15 @@ const AllBlogsPage = () => {
             <button onClick={() => navigate(`/blogs/${blog._id}`)}>
               View Details
             </button>
-            <button onClick={() => navigate(`/blogs/edit/${blog._id}`)}>
-              Edit Blog
-            </button>
-            <button onClick={() => handleDelete(blog._id)}>Delete Blog</button>
+
+            {/* THESE TWO BUTTONS changed*/}
+            {user?._id === blog.userId._id && (<>
+              <button onClick={() => navigate(`/blogs/edit/${blog._id}`)}>
+                Edit Blog
+              </button>
+              <button onClick={() => handleDelete(blog._id)}>Delete Blog</button>
+            </>)}
+
           </li>
         ))}
       </ul>
