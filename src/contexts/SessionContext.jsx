@@ -7,26 +7,29 @@ const SessionContextProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [user, setUser] = useState(null); // Setting the user tha's logged in
+
   const verifyToken = async (tokenToVerify) => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/verify`,
-        {
-          headers: {
-            Authorization: `Bearer ${tokenToVerify}`,
-          },
-        }
-      );
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/verify`, {
+        headers: { Authorization: `Bearer ${tokenToVerify}` },
+      });
+
       if (response.ok) {
+        const userData = await response.json();
+
         setToken(tokenToVerify);
         setIsAuthenticated(true);
+        setUser(userData);
       } else {
+        console.error("Verification  error:", response.status);
         localStorage.removeItem("authToken");
       }
-      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
       localStorage.removeItem("authToken");
+    } finally {
       setIsLoading(false);
     }
   };
@@ -58,7 +61,7 @@ const SessionContextProvider = ({ children }) => {
 
   return (
     <SessionContext.Provider
-      value={{ token, setToken, isAuthenticated, isLoading, logout }}
+      value={{ token, setToken, isAuthenticated, isLoading, user, setUser, logout }}
     >
       {children}
     </SessionContext.Provider>
