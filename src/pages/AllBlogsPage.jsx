@@ -59,7 +59,7 @@ const AllBlogsPage = () => {
             <button onClick={() => navigate(`/blogs/${blog._id}`)}>
               View Details
             </button>
-            <button onClick={() => navigate(`/blog/edit/${blog._id}`)}>
+            <button onClick={() => navigate(`/blogs/edit/${blog._id}`)}>
               Edit Blog
             </button>
             <button onClick={() => handleDelete(blog._id)}>Delete Blog</button>

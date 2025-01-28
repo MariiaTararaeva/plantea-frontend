@@ -51,7 +51,7 @@ function App() {
         <Route path="/blogs" element={<AllBlogsPage />} />
 
         <Route path="/blogs/:blogId" element={<BlogDetailsPage />} />
-        <Route path="/blog/edit/:blogId" element={<NewBlogPage />} />
+        <Route path="/blogs/edit/:blogId" element={<NewBlogPage />} />
 
         <Route path="*" element={<h1>404 Page</h1>} />
       </Routes>

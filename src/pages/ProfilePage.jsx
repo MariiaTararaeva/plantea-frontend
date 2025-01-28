@@ -8,7 +8,6 @@ const ProfilePage = () => {
   const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
     const fetchProfile = async () => {
-      //I NEED ERIC TO HELP ME WITH THIS
       if (!token) return; // If I remove this it will pop up an error twice ("Failed to fetch profile.") before successful fetch
 
       try {

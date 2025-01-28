@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import CommentEntry from "../components/CommentEntry";
 
 const BlogDetailsPage = () => {
@@ -6,10 +7,6 @@ const BlogDetailsPage = () => {
   const [blogEntry, setBlogEntry] = useState(null);
   const [newCommentEntry, setNewCommentEntry] = useState("");
   const [comments, setComments] = useState([]);
-  // import { useFetchBlog } from "../hooks/useFetchBlog";
-
-  // const { blogEntry, loading } = useFetchBlog(blogId);
-  //Fetch the blog
 
   async function fetchBlogEntry(blogId) {
     try {
