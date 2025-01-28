@@ -10,7 +10,7 @@ const NewBlogPage = () => {
   const { token } = useContext(SessionContext);
 
   const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
+  // const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -47,7 +47,7 @@ const NewBlogPage = () => {
   useEffect(() => {
     if (blogData) {
       setTitle(blogData.title);
-      setAuthor(blogData.author);
+      // setAuthor(blogData.author);
       setContent(blogData.textContent);
       setTags(blogData.tags);
       setSelectedSpecies(blogData.selectedSpecies);
@@ -93,7 +93,7 @@ const NewBlogPage = () => {
     event.preventDefault();
     const requestBody = {
       title,
-      author,
+      // author,
       textContent: content,
     };
     if (!isUpdate) {
@@ -119,7 +119,7 @@ const NewBlogPage = () => {
       }
       if (response.status === 201) {
         const responseBody = await response.json(); // Parse the response body as JSON
-        console.log("Response body:", responseBody); // Log the response body        navigate("/blogs");
+        console.log("Response body:", responseBody);
         navigate(`/blogs`);
       }
     } catch (error) {
@@ -133,7 +133,7 @@ const NewBlogPage = () => {
 
   return (
     <>
-      <h1>New blog</h1>
+      <h1>{blogId ? "Edit Blog" : "Create New Blog"}</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Title
@@ -143,14 +143,14 @@ const NewBlogPage = () => {
             onChange={(event) => setTitle(event.target.value)}
           />
         </label>
-        <label>
+        {/* <label>
           Author
           <input
             required
             value={author}
             onChange={(event) => setAuthor(event.target.value)}
           />
-        </label>
+        </label> */}
         <label>
           Content
           <textarea
@@ -228,153 +228,12 @@ const NewBlogPage = () => {
             )}
           </div>
         )}
-        {/*  <label>
-          Tags:
-          <input
-            type="text"
-            value={tags}
-            onChange={handleTagChange}
-            placeholder="Enter tags"
-          />
-        </label> */}
-
-        {/* {suggestions.length > 0 && (
-          <ul className="dropdown">
-            {suggestions.map((species) => (
-              <li
-                key={species._id}
-                onClick={() => handleSelectSpecies(species)}
-                className="dropdown-item"
-              >
-                {species.default_image?.thumbnail ? (
-                  <img
-                    src={species.default_image.thumbnail}
-                    alt={species.common_name || "Plant Image"}
-                    style={{ width: "50px", marginRight: "10px" }}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                      marginRight: "10px",
-                      backgroundColor: "#ccc",
-                    }}
-                  >
-                    No Image
-                  </div>
-                )}
-                {species.common_name}
-              </li>
-            ))}
-          </ul>
-        )} */}
-
-        {/* {selectedSpecies && (
-          <div>
-            <p>Selected Species: {selectedSpecies.name}</p>
-            {selectedSpecies.default_image?.thumbnail ? (
-              <img
-                src={selectedSpecies.default_image.thumbnail}
-                alt={selectedSpecies.common_name || "Selected Plant"}
-              />
-            ) : (
-              <div
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  backgroundColor: "#ccc",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                No Image
-              </div>
-            )}
-          </div>
-        )} */}
-        <button type="submit">Add blog</button>
+        <button type="submit">
+          {isUpdate ? "Edit Blog" : "Create New Blog"}
+        </button>
       </form>
     </>
   );
 };
 
 export default NewBlogPage;
-
-// import { useEffect, useState, useContext } from "react";
-// import { useParams, useNavigate } from "react-router-dom";
-// import { SessionContext } from "../contexts/SessionContext";
-// import BlogForm from "../components/BlogForm";
-
-// const BlogPage = () => {
-//   const { token } = useContext(SessionContext);
-//   const { blogId } = useParams();
-//   const navigate = useNavigate();
-//   const [blogData, setBlogData] = useState(null);
-//   const [loading, setLoading] = useState(false);
-
-//   useEffect(() => {
-//     if (blogId) {
-//       const fetchBlog = async () => {
-//         setLoading(true);
-//         try {
-//           const response = await fetch(
-//             `${import.meta.env.VITE_API_URL}/api/blogs/${blogId}`
-//           );
-//           if (response.ok) {
-//             const data = await response.json();
-//             setBlogData(data);
-//           } else {
-//             console.error("Failed to fetch blog");
-//           }
-//         } catch (error) {
-//           console.error("Error fetching blog:", error);
-//         } finally {
-//           setLoading(false);
-//         }
-//       };
-//       fetchBlog();
-//     }
-//   }, [blogId]);
-
-//   const handleSave = async (formData) => {
-//     const url = blogId
-//       ? `${import.meta.env.VITE_API_URL}/api/blogs/${blogId}`
-//       : `${import.meta.env.VITE_API_URL}/api/blogs/new`;
-//     const method = blogId ? "PUT" : "POST";
-
-//     try {
-//       setLoading(true);
-//       const response = await fetch(url, {
-//         method,
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(formData),
-//       });
-
-//       if (response.ok) {
-//         navigate("/blogs");
-//       } else {
-//         console.error("Failed to save blog", response);
-//       }
-//     } catch (error) {
-//       console.error("Error saving blog:", error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   if (loading) return <p>Loading...</p>;
-
-//   return (
-//     <div>
-//       <h1>{blogId ? "Edit Blog" : "Create New Blog"}</h1>
-//       <BlogForm blogData={blogData} onSave={handleSave} />
-//     </div>
-//   );
-// };
-
-// export default BlogPage;
