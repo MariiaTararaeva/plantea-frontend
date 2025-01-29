@@ -16,6 +16,7 @@ import MyCommentsPage from "./pages/MyCommentsPage";
 import AboutUsPage from "./pages/AboutPage";
 import RandomPlantsPage from "./pages/RandomPlantsPage";
 import RulesPage from "./pages/RulesPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
         <Route path="/siterules" element={<RulesPage />} />
         <Route path="*" element={<h1>404 Page</h1>} />
       </Routes>
+      <Footer />
     </>
   );
 }
