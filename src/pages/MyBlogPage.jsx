@@ -1,9 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { SessionContext } from "../contexts/SessionContext";
+import { useNavigate } from "react-router-dom";
+import icon from "../images/Potted-Plant-1.png";
 
 const MyBlogsPage = () => {
   const { token } = useContext(SessionContext);
   const [userBlogs, setUserBlogs] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMyBlogs = async () => {
@@ -38,16 +41,26 @@ const MyBlogsPage = () => {
       {userBlogs.blogs && userBlogs.blogs.length > 0 ? (
         userBlogs.blogs.map((blog) => (
           <div key={blog._id} style={{ border: "1px solid #ccc", margin: 8 }}>
+            {blog.userId && (
+              <>
+                <img
+                  src={blog.userId.profilePicture}
+                  alt={blog.userId.username}
+                  style={{ width: 50, height: 50, objectFit: "cover" }}
+                />
+                <p>Author: {blog.userId.username}</p>
+              </>
+            )}
             <h2>{blog.title}</h2>
             <p>{blog.textContent}</p>
-            {/* Possibly blog tags, etc. */}
+            <img src={blog.mediaContent?.[0] || icon} alt="Blog" />
           </div>
         ))
       ) : (
         <p>You did not create any content yet.</p>
       )}
       <p>Would you like to create a new post?</p>
-      <button>New Blog</button>
+      <button onClick={() => navigate("/blogs/new")}>New Post</button>
     </div>
   );
 };
