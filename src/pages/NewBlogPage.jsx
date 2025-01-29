@@ -18,6 +18,7 @@ const NewBlogPage = () => {
   const [blogData, setBlogData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isUpdate, setisUpdate] = useState(false);
+  const [mediaContent, setMediaContent] = useState([]);
 
   useEffect(() => {
     if (blogId) {
@@ -51,7 +52,7 @@ const NewBlogPage = () => {
       setContent(blogData.textContent);
       setTags(blogData.tags);
       setSelectedSpecies(blogData.selectedSpecies);
-      setmediaContent(blogData.mediaContent);
+      setMediaContent(blogData.mediaContent);
     }
   }, [blogData]);
 
@@ -100,7 +101,12 @@ const NewBlogPage = () => {
     if (!isUpdate) {
       requestBody.tags = tags;
       requestBody.selectedSpecies = selectedSpecies
-        ? { plantId: selectedSpecies.plantId, name: selectedSpecies.name, default_image: selectedSpecies.default_image.thumbnail, mediaContent: selectedSpecies.default_image}
+        ? {
+            plantId: selectedSpecies.plantId,
+            name: selectedSpecies.name,
+            default_image: selectedSpecies.default_image.thumbnail,
+            mediaContent: selectedSpecies.default_image,
+          }
         : null;
     }
     const url = `${import.meta.env.VITE_API_URL}${
@@ -121,7 +127,7 @@ const NewBlogPage = () => {
       if (response.status === 201) {
         const responseBody = await response.json(); // Parse the response body as JSON
         console.log("Response body:", responseBody);
-        navigate(`/blogs`);
+        navigate("/blogs", { replace: true });
       }
     } catch (error) {
       console.error(error);
@@ -229,7 +235,7 @@ const NewBlogPage = () => {
             )}
           </div>
         )}
-        <button type="submit">
+        <button type="submit" onClick={() => navigate("/blogs")}>
           {isUpdate ? "Edit Blog" : "Create New Blog"}
         </button>
       </form>

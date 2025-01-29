@@ -52,7 +52,31 @@ const MyCommentsPage = () => {
             {/*  The Blog Info  */}
             {comment.blogPostId && (
               <>
-                <h2>{comment.blogPostId.title}</h2>
+                {/*  Display the blog's author info (if available)  */}
+                {comment.blogPostId.userId && (
+                  <div style={{ margin: "1em 0" }}>
+                    <strong>{comment.blogPostId.userId.username}</strong>
+                    <br />
+                    <img
+                      src={comment.blogPostId.userId.profilePicture || icon}
+                      alt={comment.blogPostId.userId.username}
+                      style={{ width: 50, height: 50, objectFit: "cover" }}
+                    />
+                  </div>
+                )}
+
+                <h2
+                  key={comment.blogPostId._id}
+                  style={{
+                    cursor: "pointer",
+                    color: "green",
+                    margin: "0.5em",
+                    height: "2em",
+                  }}
+                  onClick={() => navigate(`/blogs/${comment.blogPostId._id}`)}
+                >
+                  {comment.blogPostId.title}
+                </h2>
                 {comment.blogPostId.mediaContent?.[0] ? (
                   <img
                     src={comment.blogPostId.mediaContent[0]}
@@ -74,19 +98,6 @@ const MyCommentsPage = () => {
                     : ""}
                   ...
                 </p>
-
-                {/*  Display the blog's author info (if available)  */}
-                {comment.blogPostId.userId && (
-                  <div style={{ margin: "1em 0" }}>
-                    <strong>{comment.blogPostId.userId.username}</strong>
-                    <br />
-                    <img
-                      src={comment.blogPostId.userId.profilePicture || icon}
-                      alt={comment.blogPostId.userId.username}
-                      style={{ width: 50, height: 50, objectFit: "cover" }}
-                    />
-                  </div>
-                )}
               </>
             )}
 

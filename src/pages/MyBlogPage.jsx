@@ -51,7 +51,17 @@ const MyBlogsPage = () => {
                 <p>Author: {blog.userId.username}</p>
               </>
             )}
-            <h2>{blog.title}</h2>
+            <h2
+              style={{
+                cursor: "pointer",
+                color: "green",
+                margin: "0.5em",
+                height: "2em",
+              }}
+              onClick={() => navigate(`/blogs/${blog._id}`)}
+            >
+              {blog.title}
+            </h2>
             <p>{blog.textContent}</p>
             <img src={blog.mediaContent?.[0] || icon} alt="Blog" />
           </div>
