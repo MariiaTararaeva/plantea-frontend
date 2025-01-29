@@ -21,7 +21,7 @@ const NewBlogPage = () => {
   const [other, setOther] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [mediaContent, setMediaContent] = useState([]);
-
+  const [isUploadFinished, setUploadFinished] = useState(true);
   useEffect(() => {
     if (blogId) {
       const fetchBlog = async () => {
@@ -157,7 +157,7 @@ const NewBlogPage = () => {
   };
   const handleFileUpload = (e) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
-
+    setUploadFinished(false)
     const uploadData = new FormData();
 
     // imageUrl => this name has to be the same as in the model since we pass
@@ -174,6 +174,7 @@ const NewBlogPage = () => {
       .then((data) => {
         console.log("data is: ", data);
         setImageUrl(data.fileUrl);
+        setUploadFinished(true);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
@@ -298,7 +299,7 @@ const NewBlogPage = () => {
             )}
           </div>
         )}
-        <button type="submit" onClick={() => navigate("/blogs")}>
+        <button type="submit"   disabled={!isUploadFinished} onClick={() => navigate("/blogs")}>
           {isUpdate ? "Edit Blog" : "Create New Blog"}
         </button>
       </form>
