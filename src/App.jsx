@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
 import MyBlogsPage from "./pages/MyBlogPage";
 import MyCommentsPage from "./pages/MyCommentsPage";
+import AboutUsPage from "./pages/AboutPage";
 
 function App() {
   return (
@@ -56,7 +57,7 @@ function App() {
 
         <Route path="/blogs/:blogId" element={<BlogDetailsPage />} />
         <Route path="/blogs/edit/:blogId" element={<NewBlogPage />} />
-
+        <Route path="/AboutUs" element={<AboutUsPage />} />
         <Route path="*" element={<h1>404 Page</h1>} />
       </Routes>
     </>
