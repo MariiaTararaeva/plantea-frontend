@@ -51,6 +51,7 @@ const NewBlogPage = () => {
       setContent(blogData.textContent);
       setTags(blogData.tags);
       setSelectedSpecies(blogData.selectedSpecies);
+      setmediaContent(blogData.mediaContent);
     }
   }, [blogData]);
 
@@ -99,7 +100,7 @@ const NewBlogPage = () => {
     if (!isUpdate) {
       requestBody.tags = tags;
       requestBody.selectedSpecies = selectedSpecies
-        ? { plantId: selectedSpecies.plantId, name: selectedSpecies.name }
+        ? { plantId: selectedSpecies.plantId, name: selectedSpecies.name, default_image: selectedSpecies.default_image.thumbnail, mediaContent: selectedSpecies.default_image}
         : null;
     }
     const url = `${import.meta.env.VITE_API_URL}${

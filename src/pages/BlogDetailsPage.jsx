@@ -103,8 +103,18 @@ const BlogDetailsPage = () => {
           created by {blogEntry.userId.username} -{" "}
           {new Date(blogEntry.createdAt).toLocaleString("es-ES")}
         </p>
-        <div>Where we display the images in case there are</div>
-        <p style={{ whiteSpace: "pre-line" }}>{blogEntry.textContent} </p>
+        {blogEntry?.selectedSpecies?.[0]?.default_image ? 
+          <img
+          src={blogEntry.selectedSpecies[0].default_image}
+          alt={"https://placehold.co/50x50"}
+          style={{ width: "50px", marginRight: "10px" }}
+        /> 
+        :              <img
+        src={"https://placehold.co/50x50"}
+        alt={"https://placehold.co/50x50"}
+        style={{ width: "50px", marginRight: "10px" }}
+      /> }
+          <p style={{ whiteSpace: "pre-line" }}>{blogEntry.textContent} </p>
       </div>
       <div className="commentSection">
         <h3>Comments</h3>
