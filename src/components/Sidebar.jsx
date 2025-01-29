@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+  //   const [profileData, setProfileData] = useState(null);
   const { isAuthenticated, user, logout, isLoading } =
     useContext(SessionContext);
   if (isLoading) {
@@ -11,7 +12,15 @@ const Sidebar = () => {
 
   return isAuthenticated && user ? (
     <div className="user-info">
-      <img src={user.profileImage} alt="Profile" />
+      <img
+        src={user.profilePicture}
+        alt="Profile"
+        style={{
+          width: 100,
+          height: 100,
+          borderRadius: "50%",
+        }}
+      />
       <h3>{user.username}</h3>
       <p>
         {user.name} {user.surname}
