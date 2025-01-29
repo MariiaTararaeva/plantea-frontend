@@ -60,6 +60,7 @@ const MyBlogsPage = () => {
               }}
               onClick={() => navigate(`/blogs/${blog._id}`)}
             >
+              {" "}
               {blog.title}
             </h2>
             <p>{blog.textContent}</p>
