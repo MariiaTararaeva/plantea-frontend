@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 /* temporary import  for styling */
 import "./navbarStyling.css";
+import icon from "../images/Potted-Plant-1.png"
+
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useContext(SessionContext);
@@ -17,7 +19,7 @@ const Navbar = () => {
       }}
     >
       <img
-        src="src/images/webicon.png"
+        src={icon}
         alt="Web Icon"
         style={{ height: "50px" }}
       />
@@ -45,10 +47,13 @@ const Navbar = () => {
           </ul>
         </li>
         <li>
-          <Link to="/randomplant">Random Plant</Link>
+          <Link to="/randomplants">Random Plants</Link>
         </li>
         <li>
-          <Link to="/rules">Rules</Link>
+          <Link to="/siterules">Rules</Link>
+        </li>
+        <li>
+          <Link to="/aboutUs">About</Link>
         </li>
         {isAuthenticated ? (
           <li>
