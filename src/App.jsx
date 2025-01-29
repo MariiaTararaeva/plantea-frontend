@@ -12,6 +12,7 @@ import BlogDetailsPage from "./pages/BlogDetailsPage";
 import HomePage from "./pages/HomePage";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
 import MyBlogsPage from "./pages/MyBlogPage";
+import MyCommentsPage from "./pages/MyCommentsPage";
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
         />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/myblogs" element={<MyBlogsPage />} />
+        <Route path="/mycomments" element={<MyCommentsPage />} />
+
         <Route
           path="/blogs/new"
           element={
