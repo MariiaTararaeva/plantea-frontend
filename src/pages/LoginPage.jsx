@@ -21,6 +21,7 @@ const LoginPage = () => {
         const data = await response.json();
         // console.log(data)
         setToken(data.token);
+        // TODO fetch user data and use the setUser from context
       }
     } catch (error) {
       console.log(error);

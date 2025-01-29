@@ -8,6 +8,8 @@ const SessionContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [user, setUser] = useState(null); // Setting the user tha's logged in
+  // Backlog improvement: Make sure to have a route to fetch your current user with a function in this context and call it where (and when) it is necessary. Backend route would have to work entirely with the token
+
 
   const verifyToken = async (tokenToVerify) => {
     try {
@@ -57,6 +59,7 @@ const SessionContextProvider = ({ children }) => {
     setToken();
     setIsAuthenticated(false);
     localStorage.removeItem("authToken");
+    setUser(null)
   };
 
   return (
