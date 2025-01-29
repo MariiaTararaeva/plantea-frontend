@@ -23,10 +23,10 @@ const ProfilePage = () => {
           const data = await response.json();
           setProfileData(data);
         } else {
-          alert("Failed to fetch profile.");
+          console.error("Failed to fetch profile and related blogs.");
         }
       } catch (error) {
-        console.error("Error fetching profile:", error);
+        console.error("Error fetching profile and blogs:", error);
       }
     };
 

@@ -63,13 +63,16 @@ const AllBlogsPage = () => {
             </button>
 
             {/* THESE TWO BUTTONS changed*/}
-            {user?._id === blog.userId._id && (<>
-              <button onClick={() => navigate(`/blogs/edit/${blog._id}`)}>
-                Edit Blog
-              </button>
-              <button onClick={() => handleDelete(blog._id)}>Delete Blog</button>
-            </>)}
-
+            {user?._id === blog.userId._id && (
+              <>
+                <button onClick={() => navigate(`/blogs/edit/${blog._id}`)}>
+                  Edit Blog
+                </button>
+                <button onClick={() => handleDelete(blog._id)}>
+                  Delete Blog
+                </button>
+              </>
+            )}
           </li>
         ))}
       </ul>
