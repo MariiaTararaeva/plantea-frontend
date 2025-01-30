@@ -78,9 +78,18 @@ body {
 
 /* sidebar styling */
 
+.appContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
 .mainAppContent {
-    max-width: calc(100vw - 200px);
+    flex-grow: 1;
     padding: 20px;
+    max-width: calc(100vw - 400px);
+    overflow-x: hidden;
 }
 
 .sidebar {
@@ -89,16 +98,15 @@ body {
     padding: 40px;
     border-left: solid 1px #fad888; */
     width: 200px;
-    height: calc(100vh - 60px);
-    /* Ajustar al tamaño de la pantalla menos el navbar */
-    position: fixed;
-    right: 0;
+    /* Tamaño fijo */
+    position: sticky;
     top: 60px;
-    /* Ajusta esto si tu navbar tiene otra altura */
+    /* Debajo del navbar */
+    height: calc(100vh - 60px);
 
+    background-color: #fdf3ee;
     border-left: solid 1px #fad888;
-    overflow-y: auto;
-    /* Agrega scroll si la sidebar tiene mucho contenido */
     padding: 20px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+
 }
