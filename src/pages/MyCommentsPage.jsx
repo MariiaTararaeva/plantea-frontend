@@ -25,7 +25,6 @@ const MyCommentsPage = () => {
           const userData = await response.json();
           // `userData.comments` is the array of comment objects
           setUserComments(userData.comments || []);
-          console.log(userData)
         } else {
           console.error(
             "Failed to fetch my comments. Status:",
