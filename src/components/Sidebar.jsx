@@ -11,7 +11,7 @@ const Sidebar = () => {
   }
 
   return isAuthenticated && user ? (
-    <div className="user-info">
+    <div className="user-info sidebar">
       <img
         src={user.profilePicture}
         alt="Profile"
@@ -44,7 +44,7 @@ const Sidebar = () => {
       <button onClick={logout}>Log out</button>
     </div>
   ) : (
-    <div>
+    <div className="sidebar">
       <p>Welcome User!</p>
       <p>It seems you are not logged in</p>
       <Link to="/login">Login</Link> or <Link to="/signup">Signup</Link>

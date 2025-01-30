@@ -33,20 +33,27 @@ body {
     border: solid goldenrod 1px;
     border-radius: 10px;
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
     background-color: #fdf3ee;
     box-shadow: 0 0 4px #8daf6e;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    max-width: 700px;
 }
 
-.toblogsImg {
+.toblogsImg,
+.toAboutUsCard {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: -20px;
+    gap: -80px;
 }
 
-.image {
-    width: 100px;
+.HPimage {
+    max-width: 100px;
+    max-height: 100px;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -65,6 +72,33 @@ body {
     z-index: 1;
 }
 
-.toblogsImg:hover .image {
+.card:hover .HPimage {
     transform: scale(1.1);
+}
+
+/* sidebar styling */
+
+.mainAppContent {
+    max-width: calc(100vw - 200px);
+    padding: 20px;
+}
+
+.sidebar {
+    /* min-width: 200px;
+    max-width: 300px;
+    padding: 40px;
+    border-left: solid 1px #fad888; */
+    width: 200px;
+    height: calc(100vh - 60px);
+    /* Ajustar al tamaño de la pantalla menos el navbar */
+    position: fixed;
+    right: 0;
+    top: 60px;
+    /* Ajusta esto si tu navbar tiene otra altura */
+
+    border-left: solid 1px #fad888;
+    overflow-y: auto;
+    /* Agrega scroll si la sidebar tiene mucho contenido */
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
 }
