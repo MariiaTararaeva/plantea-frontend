@@ -26,3 +26,45 @@
 body {
     background-color: #ffeadf;
 }
+
+
+/* Homepage styling */
+.card {
+    border: solid goldenrod 1px;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fdf3ee;
+    box-shadow: 0 0 4px #8daf6e;
+}
+
+.toblogsImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: -20px;
+}
+
+.image {
+    width: 100px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.img1 {
+    transform: rotate(-15deg);
+    z-index: 1;
+}
+
+.img2 {
+    transform: rotate(0deg);
+    z-index: 2;
+}
+
+.img3 {
+    transform: rotate(15deg);
+    z-index: 1;
+}
+
+.toblogsImg:hover .image {
+    transform: scale(1.1);
+}

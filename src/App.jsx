@@ -18,6 +18,9 @@ import RandomPlantsPage from "./pages/RandomPlantsPage";
 import RulesPage from "./pages/RulesPage";
 import Footer from "./components/Footer";
 
+//css imports
+import "./Lena.css"
+
 function App() {
   return (
     <>

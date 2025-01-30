@@ -27,9 +27,9 @@ const AboutUsPage = () => {
             <div id="mariiasDiv">
               <img src={Mariia} alt="Mariia's slack profile picture" />
               <h3>Mariia Tararaeva's story</h3>
-              <p>Mariia Tararaeva, of Russian descent, grew up in Siberia, riding horses across the snowy landscapes. Her life changed when she moved to Berlin with her boyfriend, who encouraged her to try something new. One day, she heard about the Ironhack bootcamp and decided to start learning to code. <br />
+              <p>Mariia Tararaeva, of Russian descent, grew up in Siberia, riding horses across the snowy landscapes. Her life changed when she moved to the Netherlands with her boyfriend, who encouraged her to try something new. One day, she heard about the Ironhack bootcamp and decided to start learning to code. <br />
 
-                At first, coding felt challenging, but with the same determination she used while riding, Mariia ventured into the world of programming. Every day, she is becoming a programmer, solving problems and acquiring new skills. On weekends, she continues riding horses, enjoying the freedom she has always loved. <br /> (totally not made up)</p>
+                At first, coding felt challenging, but with the same determination she used while riding, Mariia ventured into the world of programming. Every day, she is becoming a programmer, solving problems and acquiring new skills. On weekends, she continues riding horses, enjoying the freedom she has always loved.</p>
             </div>
             <div id="lenasDiv">
               <img src={Lena} alt="Lena photo" />
