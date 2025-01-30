@@ -22,7 +22,16 @@ const AboutUsPage = () => {
             <img src={Mine} alt="Mine photo" />
             <h3>Mine's story</h3>
             <p>
-              Some randdom text to  edit later
+            Born and raised in Turkey, I had the privilege of growing up surrounded 
+            by rich culture, warm hospitality, and breathtaking landscapes and plenty of chaos. 
+            Ten years ago, I embarked on a new chapter in Germany, where I've been living ever since. 
+            Whether it's listening to my favourite tunes or discovering new artists, or the numerous 
+            live gigs and concerts, or my amateur level guitar playing, music has always been my constant 
+            companion. It's my escape, my inspiration, and my way of connecting with the world. 
+            I have a big soft spot for animals – they make the world a kinder and more beautiful place. 
+            Whether it’s spending time with pets or admiring wildlife, animals remind me of the beauty of nature. 
+            Staying curious, asking questions, and growing every step of the way and learning new skills are vital. 
+            That’s how I found myself enrolling at Ironhack bootcamp in a turbulent period of my life :) 
             </p>
             <div id="mariiasDiv">
               <img src={Mariia} alt="Mariia's slack profile picture" />
