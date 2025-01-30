@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../assets/Forms.css";
 
 const ProfileForm = ({ data = {}, onSave, onCancel }) => {
   const [formData, setFormData] = useState({

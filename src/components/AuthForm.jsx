@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../assets/Forms.css";
 /* eslint-disable react/prop-types */
 const AuthForm = ({ submitCallback, isSignup }) => {
   const [formData, setFormData] = useState({
