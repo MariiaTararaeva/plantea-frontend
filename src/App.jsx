@@ -17,6 +17,7 @@ import AboutUsPage from "./pages/AboutPage";
 import RandomPlantsPage from "./pages/RandomPlantsPage";
 import RulesPage from "./pages/RulesPage";
 import Footer from "./components/Footer";
+import SearchResultsPage from "./pages/SearchResultsPage";
 
 //css imports
 import "./Lena.css"
@@ -25,6 +26,8 @@ function App() {
   return (
     <>
       <Navbar />
+      {/* Spacer for Navbar */}
+      <div className="h-20"></div>  
       <div className="appContainer">
         <div className="mainAppContent">
           <Routes>
@@ -67,8 +70,10 @@ function App() {
             <Route path="/AboutUs" element={<AboutUsPage />} />
             <Route path="/randomplants" element={<RandomPlantsPage />} />
             <Route path="/siterules" element={<RulesPage />} />
+            <Route path="/search-results" element={<SearchResultsPage />} />
             <Route path="*" element={<h1>404 Page</h1>} />
-          </Routes>
+        </Routes>
+
         </div>
         <Sidebar />
       </div>

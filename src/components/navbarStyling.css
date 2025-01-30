@@ -1,4 +1,4 @@
-/* THIS IS TEMPORARY TO TRY THE HOOVER THING */
+/* THIS IS TEMPORARY TO TRY THE HOOVER THING
 /* 
 .dropdown-menu {
     position: absolute;
@@ -15,10 +15,20 @@
     display: block;
 } */
 
-.dropdown-menu {
+/* .dropdown-menu {
     display: none;
 }
 
 .dropdown:hover .dropdown-menu {
     display: block;
+}  */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+   .btn-primary {
+      @apply py-1.5 px-3 text-center bg-blue-700 rounded-md text-white;
+  } 
 }
