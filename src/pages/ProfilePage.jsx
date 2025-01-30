@@ -1,85 +1,41 @@
-import { useState, useEffect, useContext, useCallback } from "react";
+import { useState, useEffect, useContext } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import ProfileForm from "../components/ProfileForm";
 
 const ProfilePage = () => {
-  const { token } = useContext(SessionContext);
-  const [profileData, setProfileData] = useState(null);
+  const {
+    user, // from context
+    token,
+    fetchUserProfile, // from context
+    uploadProfilePicture, // from context
+  } = useContext(SessionContext);
+
+  // Local UI states
   const [isEditing, setIsEditing] = useState(false);
-  // const [profilePicture, setProfilePicture] = useState(null); // Stores uploaded image URL
   const [uploading, setUploading] = useState(false);
-  const [hover, setHover] = useState(false); // Track hover state
+  const [hover, setHover] = useState(false);
 
-  const fetchProfile = useCallback(async () => {
-    if (!token) return;
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/users/profile`,
-        {
-          method: "GET",
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        setProfileData(data);
-      } else {
-        console.error("Failed to fetch profile.");
-      }
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-    }
-  }, [token]);
-
+  // Fetch user data on mount (or whenever token changes)
   useEffect(() => {
-    fetchProfile();
-  }, [fetchProfile, token]);
+    fetchUserProfile();
+  }, [fetchUserProfile, token]);
 
-  const uploadImage = async (file) => {
-    setUploading(true);
-    const uploadData = new FormData();
-    uploadData.append("imageUrl", file);
+  // If no user info yet, show a loading message
+  if (!user) {
+    return <p>Loading...</p>;
+  }
 
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/users/profilePicture`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: uploadData,
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to upload image.");
-      }
-
-      const data = await response.json();
-
-      // Update the profile picture
-      await fetchProfile();
-
-      return data.fileUrl;
-    } catch (error) {
-      console.error("Error while uploading file:", error);
-      alert("Error uploading image");
-      return null;
-    } finally {
-      setUploading(false);
-    }
-  };
-
+  // --- Handle File Upload ---
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+    setUploading(true);
 
-    await uploadImage(file);
+    await uploadProfilePicture(file); // calls the context function
+    setUploading(false);
   };
 
+  // --- Handle Profile Save ---
   const handleSave = async (updatedData) => {
     try {
       const response = await fetch(
@@ -92,15 +48,16 @@ const ProfilePage = () => {
           },
           body: JSON.stringify({
             ...updatedData,
-            profilePicture: profileData.profilePicture,
+            // Keep the existing profilePicture from user in context
+            profilePicture: user.profilePicture,
           }),
         }
       );
 
       if (response.ok) {
-        const updatedProfile = await response.json();
-        setProfileData(updatedProfile);
-        setIsEditing(false); // Exit edit mode
+        // Refresh user data in context
+        await fetchUserProfile();
+        setIsEditing(false);
         alert("Profile updated successfully!");
       } else {
         alert("Failed to update profile.");
@@ -110,14 +67,13 @@ const ProfilePage = () => {
     }
   };
 
-  if (!profileData) return <p>Loading...</p>;
-
+  // --- Render ---
   return (
     <div>
       {!isEditing ? (
         <div>
           <h1>
-            {profileData.firstName} {profileData.surname}
+            {user.firstName} {user.surname}
           </h1>
 
           <label
@@ -130,7 +86,7 @@ const ProfilePage = () => {
             onMouseLeave={() => setHover(false)}
           >
             <img
-              src={profileData.profilePicture}
+              src={user.profilePicture}
               alt="Profile"
               style={{
                 width: 100,
@@ -138,7 +94,7 @@ const ProfilePage = () => {
                 borderRadius: "50%",
                 objectFit: "cover",
                 transition: "opacity 0.3s",
-                opacity: uploading ? 0.5 : 1, // Dim image while uploading
+                opacity: uploading ? 0.5 : 1,
               }}
             />
             {hover && (
@@ -182,25 +138,26 @@ const ProfilePage = () => {
           {uploading && <p>Uploading...</p>}
 
           <p>
-            <strong>Username:</strong> {profileData.username}
+            <strong>Username:</strong> {user.username}
           </p>
           <p>
-            <strong>Email:</strong> {profileData.email}
+            <strong>Email:</strong> {user.email}
           </p>
           <p>
-            <strong>Bio:</strong>{" "}
-            {profileData.bioDescription || "No bio provided."}
+            <strong>Bio:</strong> {user.bioDescription || "No bio provided."}
           </p>
           <p>
-            <strong>Greenhouse:</strong>{" "}
-            {profileData.greenhouse.join(", ") || "None"}
+            <strong>Greenhouse:</strong>
+            {Array.isArray(user.greenhouse)
+              ? user.greenhouse.join(", ")
+              : "None"}
           </p>
+
           <button onClick={() => setIsEditing(true)}>Edit Profile</button>
         </div>
       ) : (
-        //USE this logic for editing the blog page (NewBlogPage.jsx)
         <ProfileForm
-          data={profileData}
+          data={user}
           onSave={handleSave}
           onCancel={() => setIsEditing(false)}
         />

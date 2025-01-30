@@ -8,6 +8,7 @@ const NewBlogPage = () => {
   const navigate = useNavigate();
   const { blogId } = useParams();
   const { token } = useContext(SessionContext);
+  const { createdBlog, handleAddBlogLocally } = useContext(SessionContext);
 
   const [title, setTitle] = useState("");
   // const [author, setAuthor] = useState("");
@@ -22,6 +23,7 @@ const NewBlogPage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [mediaContent, setMediaContent] = useState([]);
   const [isUploadFinished, setUploadFinished] = useState(true);
+
   useEffect(() => {
     if (blogId) {
       const fetchBlog = async () => {
@@ -71,7 +73,6 @@ const NewBlogPage = () => {
         );
         if (response.ok) {
           const matches = await response.json();
-          console.log(matches);
           setSuggestions(matches);
         } else {
           console.log(response);
@@ -132,7 +133,6 @@ const NewBlogPage = () => {
       }
       if (response.status === 201) {
         const responseBody = await response.json(); // Parse the response body as JSON
-        console.log("Response body:", responseBody);
         setImageUrl(""); // also other setters must be cleaned up!?
 
         navigate("/blogs", { replace: true });
@@ -157,7 +157,7 @@ const NewBlogPage = () => {
   };
   const handleFileUpload = (e) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
-    setUploadFinished(false)
+    setUploadFinished(false);
     const uploadData = new FormData();
 
     // imageUrl => this name has to be the same as in the model since we pass
@@ -166,15 +166,14 @@ const NewBlogPage = () => {
 
     uploadImage(uploadData)
       .then((response) => {
-        console.log("response is: ", response);
         // response carries "fileUrl" which we can use to update the state
 
         return response.json();
       })
       .then((data) => {
-        console.log("data is: ", data);
         setImageUrl(data.fileUrl);
         setUploadFinished(true);
+        handleAddBlogLocally(createdBlog);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
@@ -299,7 +298,11 @@ const NewBlogPage = () => {
             )}
           </div>
         )}
-        <button type="submit"   disabled={!isUploadFinished} onClick={() => navigate("/blogs")}>
+        <button
+          type="submit"
+          disabled={!isUploadFinished}
+          onClick={() => navigate("/blogs")}
+        >
           {isUpdate ? "Edit Blog" : "Create New Blog"}
         </button>
       </form>
