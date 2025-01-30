@@ -1,6 +1,9 @@
 import AuthForm from "../components/AuthForm";
+import { useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
+  const navigate = useNavigate();
+
   const handleSignup = async (credentials) => {
     try {
       const response = await fetch(
@@ -13,6 +16,7 @@ const SignupPage = () => {
       );
       if (response.ok) {
         alert("User created successfully!");
+        navigate("/login")
       } else {
         alert("Failed to sign up.");
       }
