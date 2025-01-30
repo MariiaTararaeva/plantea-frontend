@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../components/navbarStyling.css";
 import { useNavigate } from "react-router-dom";
 /* temporarely */
-import lena from "../images/Lena.png"
-import mariia from "../images/mariia.png"
-import mine from "../images/Mine.png"
-import image1 from "../images/cactus.png"
-import image2 from "../images/icon-rice.png"
-import image3 from "../images/sakura.png"
-import whatsNext from "../images/seed.png"
-import rulesIcon from "../images/medicine.png"
-import fossil from "../images/fossil.png"
-
+import lena from "../images/Lena.png";
+import mariia from "../images/mariia.png";
+import mine from "../images/Mine.png";
+import image1 from "../images/cactus.png";
+import image2 from "../images/icon-rice.png";
+import image3 from "../images/sakura.png";
+import whatsNext from "../images/seed.png";
+import rulesIcon from "../images/medicine.png";
+import fossil from "../images/fossil.png";
+import "../assets/Forms.css";
 
 const HomePage = () => {
-
   const navigate = useNavigate();
 
   const [searchResults, setSearchResults] = useState([]); // Results from search
@@ -33,7 +32,9 @@ const HomePage = () => {
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/plants/search?query=${searchQuery}`); // Assuming this endpoint exists
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/plants/search?query=${searchQuery}`
+      ); // Assuming this endpoint exists
       if (!response.ok) throw new Error("Failed to fetch search results");
       const data = await response.json();
       setSearchResults(data);
@@ -43,11 +44,9 @@ const HomePage = () => {
   };
 
   return (
-
     <div className="main-content">
       <h1>Welcome to the Plant Blog!</h1>
       <div className="searchDiv">
-        <h2>Serch for a plant your interested in </h2>
         {/* Search Bar */}
         <form onSubmit={handleSearchSubmit} className="search-bar">
           <input
@@ -65,7 +64,11 @@ const HomePage = () => {
             <h2>Search Results:</h2>
             <div className="plant-grid">
               {searchResults.map((plant) => (
-                <div key={plant._id} className="plant-card" onClick={() => handlePlantClick(plant._id)}>
+                <div
+                  key={plant._id}
+                  className="plant-card"
+                  onClick={() => handlePlantClick(plant._id)}
+                >
                   <img
                     src={plant.default_image?.thumbnail || "/placeholder.jpg"}
                     alt={plant.common_name || "Plant"}
@@ -114,7 +117,6 @@ const HomePage = () => {
         </div>
       </div>
     </div>
-
   );
 };
 

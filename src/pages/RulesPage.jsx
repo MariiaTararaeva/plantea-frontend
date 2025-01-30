@@ -1,5 +1,3 @@
-import PlantDiseaseCarousel from "../components/PlantDiseaseCarousel";
-
 const RulesPage = () => {
   return (
     <>
@@ -57,11 +55,6 @@ const RulesPage = () => {
       </p>
 
       <h4>Happy growing! 🌍💚</h4>
-
-      <div>
-        <h1>Welcome to My Plant App!</h1>
-        <PlantDiseaseCarousel />
-      </div>
     </>
   );
 };

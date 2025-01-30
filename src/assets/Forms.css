@@ -12,13 +12,6 @@ form {
   gap: 15px;
 }
 
-/* Form Headings */
-form h2 {
-  color: #d05d74;
-  text-align: center;
-  margin-bottom: 15px;
-}
-
 /* Labels */
 label {
   font-weight: bold;
@@ -28,32 +21,33 @@ label {
 /* Inputs & Textareas */
 input,
 textarea {
-  width: 100%;
+  width: calc(100% - 20px); /* Prevents right-side overflow */
   padding: 10px;
   border: 1px solid #fad888;
   border-radius: 5px;
-  background-color: #ffeadf;
+  background-color: #f0e7e2;
   transition: all 0.3s ease-in-out;
 }
 
-/* Inputs Focus Effect */
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: #d05d74;
-  box-shadow: 0 0 5px #d05d74;
+/* Buttons Container */
+.form-buttons {
+  display: flex;
+  justify-content: space-between; /* Align buttons in a row */
+  gap: 10px; /* Space between buttons */
 }
 
 /* Buttons */
 button {
   background-color: goldenrod;
   color: white;
-  padding: 10px;
+  padding: 10px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s ease-in-out;
+  flex: 1; /* Makes buttons the same size */
+  max-width: 120px; /* Prevents buttons from being too wide */
 }
 
 button:hover {
@@ -64,61 +58,169 @@ button:hover {
 /* Cancel Button */
 button[type="button"] {
   background-color: #df8758;
+  margin-left: 20px;
 }
 
 button[type="button"]:hover {
   background-color: #d05d74;
 }
 
-/* Form Container */
-.form-container {
+/* Homepage Styling */
+/* 🌱 Search Section */
+.searchDiv {
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 🔍 Search Bar */
+.search-bar {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 300px;
+  margin: auto;
+  padding: 0;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background-color: #fdf3ee;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #8daf6e;
+  box-shadow: 0 0 5px #8daf6e;
+}
+
+.search-bar button {
+  background-color: goldenrod;
+  color: white;
+  padding: 8px 15px;
+  border: 1px solid goldenrod;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-bar button:hover {
+  background-color: #cf487f;
+  transform: scale(1.05);
+}
+
+/*  Search Results */
+.search-results {
+  margin-top: 20px;
+}
+
+/*  Search Result Grid */
+.plant-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+/*  Individual Plant Card */
+.plant-card {
+  background-color: white;
+  border: 1px solid #fad888;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  width: 130px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.plant-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 🌿 Plant Image */
+.plant-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+/* footer css */
+/* 🌱 Footer Styling */
+.footer {
+  background-color: #fdf3ee; /* Soft warm background */
+  border-top: 2px solid goldenrod;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 🌿 Footer Text */
+/* 🌱 Footer Styling */
+.footer {
+  background-color: #fdf3ee; /* Soft warm background */
+  border-top: 2px solid goldenrod;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "AdaleMono", monospace;
+}
+
+/* 🌿 Footer Title */
+.footer-title {
+  color: #54950e; /* Green color from your palette */
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* 🌱 Footer Links */
+.footer-links {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  gap: 15px;
+  font-size: 18px;
 }
 
-/* Dropdown Suggestion List */
-.dropdown {
-  list-style: none;
-  padding: 0;
-  margin-top: 10px;
-  background-color: #ffe7f3;
-  border: 1px solid #d05d74;
-  border-radius: 5px;
-  max-height: 150px;
-  overflow-y: auto;
+/* 🔗 GitHub Icons */
+.footer-icon {
+  color: #362800; /* Dark earthy color */
+  font-size: 22px;
+  margin-right: 5px;
 }
 
-.dropdown-item {
-  padding: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
+/* 🖋️ Footer Links */
+.footer a {
+  text-decoration: none;
+  color: #d05d74;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease-in-out;
 }
 
-.dropdown-item:hover {
-  background-color: #f6a5cd;
+.footer a:hover {
+  color: #cf487f;
 }
 
-/* Selected Species Section */
-.selected-species {
-  text-align: center;
-  padding: 10px;
-  border: 1px solid goldenrod;
-  background-color: #fdf3ee;
-  border-radius: 10px;
-}
-
-/* Image Preview */
-.selected-species img {
-  width: 100px;
-  height: auto;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-/* File Upload Styling */
-input[type="file"] {
-  background-color: #f6ffee;
-  border: 1px solid #8daf6e;
+/* 🌱 "or" separator */
+.footer .or {
+  color: #54950e; /* Same green as footer title */
+  font-weight: bold;
+  font-size: 18px;
 }
