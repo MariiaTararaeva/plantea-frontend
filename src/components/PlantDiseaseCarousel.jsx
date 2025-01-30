@@ -47,7 +47,11 @@ function PlantDiseaseCarousel() {
             </div>
             <div className="card-back">
               <h4>Scientific name(s):</h4>
-              <p>{disease.scientific_name?.join(", ")}</p>
+              <p>
+                {Array.isArray(disease.scientific_name)
+                  ? disease.scientific_name.join(", ")
+                  : disease.scientific_name}
+              </p>
               {/* maybe a short snippet from the description */}
               {disease.description?.[0] && (
                 <p>{disease.description[0].description.slice(0, 100)}...</p>
