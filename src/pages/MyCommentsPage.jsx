@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
 import icon from "../images/Potted-Plant-1.png";
-
+//<hr> LINE
 const MyCommentsPage = () => {
   const { token } = useContext(SessionContext);
   const [userComments, setUserComments] = useState([]);
@@ -25,6 +25,7 @@ const MyCommentsPage = () => {
           const userData = await response.json();
           // `userData.comments` is the array of comment objects
           setUserComments(userData.comments || []);
+          console.log(userData)
         } else {
           console.error(
             "Failed to fetch my comments. Status:",
@@ -55,73 +56,84 @@ const MyCommentsPage = () => {
                 {/*  Display the blog's author info (if available)  */}
                 {comment.blogPostId.userId && (
                   <div style={{ margin: "1em 0" }}>
-                    <strong>{comment.blogPostId.userId.username}</strong>
-                    <br />
                     <img
                       src={comment.blogPostId.userId.profilePicture || icon}
                       alt={comment.blogPostId.userId.username}
                       style={{ width: 50, height: 50, objectFit: "cover" }}
                     />
+                    <br />
+                    <strong>{comment.blogPostId.userId.username}</strong>
                   </div>
                 )}
+                <div>
+                  <p>on {new Date(comment.blogPostId.createdAt).toLocaleString("es-ES")}</p>
+                  <h2
+                    key={comment.blogPostId._id}
+                    style={{
+                      cursor: "pointer",
+                      color: "green",
+                      margin: "0.5em",
+                      height: "2em",
+                    }}
+                    onClick={() => navigate(`/blogs/${comment.blogPostId._id}`)}
+                  >
+                    {comment.blogPostId.title}
+                  </h2>
+                  <div>
+                    {comment.blogPostId.mediaContent?.[0] ? (
+                      <img
+                        src={comment.blogPostId.mediaContent[0]}
+                        alt="Blog main"
+                        style={{ width: 200, objectFit: "cover", display: "block" }}
+                      />
+                    ) : (
+                      <img
+                        src={icon}
+                        alt="Fallback"
+                        style={{ width: 200, objectFit: "cover", display: "block" }}
+                      />
+                    )}
 
-                <h2
-                  key={comment.blogPostId._id}
-                  style={{
-                    cursor: "pointer",
-                    color: "green",
-                    margin: "0.5em",
-                    height: "2em",
-                  }}
-                  onClick={() => navigate(`/blogs/${comment.blogPostId._id}`)}
-                >
-                  {comment.blogPostId.title}
-                </h2>
-                {comment.blogPostId.mediaContent?.[0] ? (
-                  <img
-                    src={comment.blogPostId.mediaContent[0]}
-                    alt="Blog main"
-                    style={{ width: 200, objectFit: "cover", display: "block" }}
-                  />
-                ) : (
-                  <img
-                    src={icon}
-                    alt="Fallback"
-                    style={{ width: 200, objectFit: "cover", display: "block" }}
-                  />
-                )}
+                    {/* Blog Post Text */}
+                    <p>
+                      {comment.blogPostId.textContent
+                        ? comment.blogPostId.textContent.substring(0, 250)
+                        : ""}
+                      ...
+                    </p>
+                  </div>
 
-                {/* Blog Post Text */}
-                <p>
-                  {comment.blogPostId.textContent
-                    ? comment.blogPostId.textContent.substring(0, 250)
-                    : ""}
-                  ...
-                </p>
+                  {/*  Users Comment  */}
+                  <hr />
+                  <div>
+                    <div>
+                      {comment.userId && (
+                        <>
+                          <img
+                            src={comment.userId.profilePicture || icon}
+                            alt={comment.userId.username}
+                            style={{
+                              width: 30,
+                              height: 30,
+                              objectFit: "cover",
+                              marginLeft: 8,
+                            }}
+                          />
+                          <br />
+                          <span>{comment.userId.username}</span>
+                        </>
+                      )}
+                    </div>
+                    <div style={{ marginTop: "1rem" }}>
+                      <p>on {new Date(comment.createdAt).toLocaleString("es-ES")}</p>
+
+                      <p>{comment.content}</p>
+
+                    </div>
+                  </div>
+                </div>
+
               </>
-            )}
-
-            {/*  Users Comment  */}
-            <div style={{ marginTop: "1rem" }}>
-              <strong></strong> {comment.content}
-            </div>
-
-            {/* Optional: to show the commenter’s user info
-              ( the same as the logged-in user) */}
-            {comment.userId && (
-              <div style={{ marginTop: "0.5rem" }}>
-                <span>{comment.userId.username}</span>
-                <img
-                  src={comment.userId.profilePicture || icon}
-                  alt={comment.userId.username}
-                  style={{
-                    width: 30,
-                    height: 30,
-                    objectFit: "cover",
-                    marginLeft: 8,
-                  }}
-                />
-              </div>
             )}
           </div>
         ))
