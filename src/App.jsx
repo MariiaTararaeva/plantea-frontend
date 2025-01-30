@@ -25,50 +25,52 @@ function App() {
   return (
     <>
       <Navbar />
-      <Sidebar />
-      <div className="mainAppContent">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/plants/:plantId" element={<PlantDetailsPage />} />
+      <div className="appContainer">
+        <div className="mainAppContent">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/plants/:plantId" element={<PlantDetailsPage />} />
 
-          <Route
-            path="/signup"
-            element={
-              <AnonymousRoute>
-                <SignupPage />
-              </AnonymousRoute>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <AnonymousRoute>
-                <LoginPage />
-              </AnonymousRoute>
-            }
-          />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/myblogs" element={<MyBlogsPage />} />
-          <Route path="/mycomments" element={<MyCommentsPage />} />
+            <Route
+              path="/signup"
+              element={
+                <AnonymousRoute>
+                  <SignupPage />
+                </AnonymousRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <AnonymousRoute>
+                  <LoginPage />
+                </AnonymousRoute>
+              }
+            />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/myblogs" element={<MyBlogsPage />} />
+            <Route path="/mycomments" element={<MyCommentsPage />} />
 
-          <Route
-            path="/blogs/new"
-            element={
-              <PrivateRoute>
-                <NewBlogPage />
-              </PrivateRoute>
-            }
-          />
+            <Route
+              path="/blogs/new"
+              element={
+                <PrivateRoute>
+                  <NewBlogPage />
+                </PrivateRoute>
+              }
+            />
 
-          <Route path="/blogs" element={<AllBlogsPage />} />
+            <Route path="/blogs" element={<AllBlogsPage />} />
 
-          <Route path="/blogs/:blogId" element={<BlogDetailsPage />} />
-          <Route path="/blogs/edit/:blogId" element={<NewBlogPage />} />
-          <Route path="/AboutUs" element={<AboutUsPage />} />
-          <Route path="/randomplants" element={<RandomPlantsPage />} />
-          <Route path="/siterules" element={<RulesPage />} />
-          <Route path="*" element={<h1>404 Page</h1>} />
-        </Routes>
+            <Route path="/blogs/:blogId" element={<BlogDetailsPage />} />
+            <Route path="/blogs/edit/:blogId" element={<NewBlogPage />} />
+            <Route path="/AboutUs" element={<AboutUsPage />} />
+            <Route path="/randomplants" element={<RandomPlantsPage />} />
+            <Route path="/siterules" element={<RulesPage />} />
+            <Route path="*" element={<h1>404 Page</h1>} />
+          </Routes>
+        </div>
+        <Sidebar />
       </div>
 
       <Footer />
