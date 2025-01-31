@@ -55,10 +55,10 @@ const RandomPlantsPage = () => {
                 {plant.watering === "Average"
                   ? "💧💧"
                   : plant.watering === "Frequent"
-                  ? "💧💧💧"
-                  : plant.watering === "Minimum"
-                  ? "💧"
-                  : null}
+                    ? "💧💧💧"
+                    : plant.watering === "Minimum"
+                      ? "💧"
+                      : null}
               </p>
             </div>
           ))}

@@ -21,10 +21,10 @@ function PlantDiseaseCarousel() {
       .catch((err) => console.error("Error fetching diseases:", err));
   }, []);
 
-  const handleCardClick = (diseaseId) => {
-    // later, navigate to a detail page: /disease/:id
-    navigate(`/diseases/${diseaseId}`);
-  };
+  /*  const handleCardClick = (diseaseId) => {
+     // later, navigate to a detail page: /disease/:id
+     navigate(`/diseases/${diseaseId}`);
+   }; */
 
   return (
     <div className="disease-carousel-container">
@@ -39,7 +39,7 @@ function PlantDiseaseCarousel() {
           <div
             className="disease-card"
             key={disease._id}
-            onClick={() => handleCardClick(disease._id)}
+          /* onClick={() => handleCardClick(disease._id)} */
           >
             <div className="card-front">
               <img src={firstImage} alt={disease.common_name} />
