@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 const HomePage = () => {
   return (
     <div className="main-content">
-      <h1>Welcome to the Plant Blog!</h1>
+      <h1 className="h1">Welcome to the Plant Blog!</h1>
       <div className="homePageCards">
         <Link to="/blogs">
           <div className="toBlogsCard card">
