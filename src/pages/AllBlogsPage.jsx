@@ -55,48 +55,43 @@ const AllBlogsPage = () => {
   };
 
   return (
-    <div>
-      <h1>All Blogs</h1>
-      <ul>
+    <div className="blog-container">
+      <h1 className="h1">All Blogs</h1>
+      <ul className="blog-list">
         {blogs.map((blog) => (
-          <li key={blog._id}>
-            <h2>{blog.title}</h2>
-            {/* if user selects a db image, take it as icon image, otherwise check uploaded images, if none display placeholder image */}
+          <li key={blog._id} className="blog-item">
+            {/* Blog Thumbnail Image */}
             {blog?.selectedSpecies?.[0]?.default_image ? (
               <img
                 src={blog.selectedSpecies[0].default_image}
-                alt={"https://placehold.co/50x50"}
-                style={{ width: "50px", marginRight: "10px" }}
+                alt={blog.title}
               />
             ) : blog?.mediaContent?.[0]?.length > 0 ? (
-              <img
-                src={blog.mediaContent}
-                alt={"https://placehold.co/50x50"}
-                style={{ width: "50px", marginRight: "10px" }}
-              />
+              <img src={blog.mediaContent} alt={blog.title} />
             ) : (
-              <img
-                src={"https://placehold.co/50x50"}
-                alt={"https://placehold.co/50x50"}
-                style={{ width: "50px", marginRight: "10px" }}
-              />
+              <img src={"https://placehold.co/80x80"} alt="Placeholder" />
             )}
 
-            <button onClick={() => navigate(`/blogs/${blog._id}`)}>
-              View Details
-            </button>
+            {/* Blog Title */}
+            <h2 onClick={() => navigate(`/blogs/${blog._id}`)}>{blog.title}</h2>
 
-            {/* THESE TWO BUTTONS changed*/}
-            {user?._id === blog.userId._id && (
-              <>
-                <button onClick={() => navigate(`/blogs/edit/${blog._id}`)}>
-                  Edit Blog
-                </button>
-                <button onClick={() => handleDelete(blog._id)}>
-                  Delete Blog
-                </button>
-              </>
-            )}
+            {/* Action Buttons */}
+            <div className="blog-buttons">
+              <button onClick={() => navigate(`/blogs/${blog._id}`)}>
+                View Details
+              </button>
+
+              {user?._id === blog.userId._id && (
+                <>
+                  <button onClick={() => navigate(`/blogs/edit/${blog._id}`)}>
+                    Edit Blog
+                  </button>
+                  <button onClick={() => handleDelete(blog._id)}>
+                    Delete Blog
+                  </button>
+                </>
+              )}
+            </div>
           </li>
         ))}
       </ul>

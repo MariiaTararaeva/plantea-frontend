@@ -40,8 +40,8 @@ const MyCommentsPage = () => {
   }, [token]);
 
   return (
-    <div>
-      <h1>Your Activity</h1>
+    <div className="comment">
+      <h1 className="h1">Your Activity</h1>
 
       {userComments.length > 0 ? (
         userComments.map((comment) => (
@@ -65,7 +65,12 @@ const MyCommentsPage = () => {
                   </div>
                 )}
                 <div>
-                  <p>on {new Date(comment.blogPostId.createdAt).toLocaleString("es-ES")}</p>
+                  <p>
+                    on{" "}
+                    {new Date(comment.blogPostId.createdAt).toLocaleString(
+                      "es-ES"
+                    )}
+                  </p>
                   <h2
                     key={comment.blogPostId._id}
                     style={{
@@ -83,13 +88,21 @@ const MyCommentsPage = () => {
                       <img
                         src={comment.blogPostId.mediaContent[0]}
                         alt="Blog main"
-                        style={{ width: 200, objectFit: "cover", display: "block" }}
+                        style={{
+                          width: 200,
+                          objectFit: "cover",
+                          display: "block",
+                        }}
                       />
                     ) : (
                       <img
                         src={icon}
                         alt="Fallback"
-                        style={{ width: 200, objectFit: "cover", display: "block" }}
+                        style={{
+                          width: 200,
+                          objectFit: "cover",
+                          display: "block",
+                        }}
                       />
                     )}
 
@@ -124,20 +137,20 @@ const MyCommentsPage = () => {
                       )}
                     </div>
                     <div style={{ marginTop: "1rem" }}>
-                      <p>on {new Date(comment.createdAt).toLocaleString("es-ES")}</p>
+                      <p>
+                        on {new Date(comment.createdAt).toLocaleString("es-ES")}
+                      </p>
 
                       <p>{comment.content}</p>
-
                     </div>
                   </div>
                 </div>
-
               </>
             )}
           </div>
         ))
       ) : (
-        <p>You have not made any comments yet.</p>
+        <p className="about">You have not made any comments yet.</p>
       )}
 
       <button onClick={() => navigate("/blogs")}>See All Blogs</button>

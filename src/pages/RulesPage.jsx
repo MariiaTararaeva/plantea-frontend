@@ -1,7 +1,7 @@
 const RulesPage = () => {
   return (
-    <>
-      <h1>🌿 Welcome to the Green Thumb Forum! 🌿</h1>
+    <div className="about">
+      <h1 className="h1">🌿 Welcome to the Green Thumb Forum! 🌿</h1>
 
       <p>
         We're thrilled to have you in our little garden of plant lovers! To keep
@@ -55,7 +55,7 @@ const RulesPage = () => {
       </p>
 
       <h4>Happy growing! 🌍💚</h4>
-    </>
+    </div>
   );
 };
 

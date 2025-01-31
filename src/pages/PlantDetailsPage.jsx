@@ -12,7 +12,9 @@ const PlantDetailsPage = () => {
   useEffect(() => {
     const fetchPlantDetails = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/plants/${plantId}`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/plants/${plantId}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch plant details");
         }
@@ -36,24 +38,30 @@ const PlantDetailsPage = () => {
   }
 
   return (
-
-        <div className="main-content">
-          <h1>{plant.common_name || plant.scientific_name}</h1>
-          <img
-            src={plant.default_image?.thumbnail || "/placeholder.jpg"}
-            alt={plant.common_name || "Plant"}
-            className="plant-image"
-          />
-          <p><strong>Scientific Name:</strong> {plant.scientific_name}</p>
-          <p><strong>Common Name:</strong> {plant.common_name}</p>
-          <p><strong>Watering:</strong> {plant.watering || "No description available."}</p>
-          <p><strong>Sunlight:</strong>{" "}
+    <div className="main-content">
+      <h1 className="h1">{plant.common_name || plant.scientific_name}</h1>
+      <img
+        src={plant.default_image?.thumbnail || "/placeholder.jpg"}
+        alt={plant.common_name || "Plant"}
+        className="plant-image"
+      />
+      <p>
+        <strong>Scientific Name:</strong> {plant.scientific_name}
+      </p>
+      <p>
+        <strong>Common Name:</strong> {plant.common_name}
+      </p>
+      <p>
+        <strong>Watering:</strong>{" "}
+        {plant.watering || "No description available."}
+      </p>
+      <p>
+        <strong>Sunlight:</strong>{" "}
         {Array.isArray(plant.sunlight) && plant.sunlight.length > 1
-            ? plant.sunlight.join(", ")
-            : plant.sunlight || "Unknown"}
-        </p>
-        </div>
-
+          ? plant.sunlight.join(", ")
+          : plant.sunlight || "Unknown"}
+      </p>
+    </div>
   );
 };
 

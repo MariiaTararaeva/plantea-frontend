@@ -56,7 +56,6 @@ function PlantDiseaseCarousel() {
               {disease.description?.[0] && (
                 <p>{disease.description[0].description.slice(0, 100)}...</p>
               )}
-              <p>Click for details</p>
             </div>
           </div>
         );

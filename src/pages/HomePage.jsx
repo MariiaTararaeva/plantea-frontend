@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "../components/navbarStyling.css";
 /* temporarely */
 import lena from "../images/Lena.png";
@@ -13,12 +12,10 @@ import fossil from "../images/fossil.png";
 import "../assets/Forms.css";
 
 const HomePage = () => {
-
   return (
-
     <div className="main-content">
-      <h1>Welcome to the Plant Blog!</h1>
-        <div className="homePageCards">
+      <h1 className="h1">Welcome to the Plant Blog!</h1>
+      <div className="homePageCards">
         <div className="toBlogsCard card">
           <div className="toblogsImg">
             <img src={image1} className="HPimage img1" />
@@ -28,20 +25,20 @@ const HomePage = () => {
           <h2>Check out the blog posts</h2>
         </div>
 
-          <div className="toNewBlogCard card">
-            <h2>Create a new blog post</h2>
-            <img src={whatsNext} alt="newBlogIcon" className="HPimage" />
-          </div>
+        <div className="toNewBlogCard card">
+          <h2>Create a new blog post</h2>
+          <img src={whatsNext} alt="newBlogIcon" className="HPimage" />
+        </div>
 
-          <div className="toDiscover card">
-            <img src={fossil} alt="toRulesImg" className="HPimage" />
-            <h2>Discover something new in the world of plants</h2>
-          </div>
+        <div className="toDiscover card">
+          <img src={fossil} alt="toRulesImg" className="HPimage" />
+          <h2>Discover something new in the world of plants</h2>
+        </div>
 
-          <div className="toRulesCard card">
-            <h2>Read the rules</h2>
-            <img src={rulesIcon} alt="toRulesImg" className="HPimage" />
-          </div>
+        <div className="toRulesCard card">
+          <h2>Read the rules</h2>
+          <img src={rulesIcon} alt="toRulesImg" className="HPimage" />
+        </div>
 
         <div className="toAboutUsCard card">
           <div className="toAboutUsImg">
