@@ -119,3 +119,70 @@ body {
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
 
 }
+
+/* my comments  styling */
+
+.commentCard {
+    margin: 8px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #fcf1ec;
+}
+
+.blogAuthInfo {
+    margin: 1em 0;
+}
+
+.blogAuthImg {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.blogTitleClickable {
+    cursor: pointer;
+    color: #54950E;
+    margin: 0.5em;
+    height: 2em;
+}
+
+.blogTitleClickable:hover {
+    color: #8daf6e;
+}
+
+.blogContentComment {
+    display: flex;
+    gap: 30px;
+}
+
+.blogContentComment img {
+    width: 120px;
+    object-fit: cover;
+    display: block;
+    border-radius: 75px;
+}
+
+.commentGeneralDiv {
+    display: flex;
+    gap: 20px;
+}
+
+.commentUserInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+}
+
+.commentAuthImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    object-fit: cover;
+    margin-left: 9px;
+}

@@ -45,20 +45,16 @@ const MyCommentsPage = () => {
 
       {userComments.length > 0 ? (
         userComments.map((comment) => (
-          <div
-            key={comment._id}
-            style={{ border: "1px solid #ccc", margin: 8, padding: 8 }}
-          >
+          <div key={comment._id} className="commentCard" >
             {/*  The Blog Info  */}
             {comment.blogPostId && (
               <>
                 {/*  Display the blog's author info (if available)  */}
                 {comment.blogPostId.userId && (
-                  <div style={{ margin: "1em 0" }}>
-                    <img
+                  <div className="blogAuthInfo">
+                    <img className="blogAuthImg"
                       src={comment.blogPostId.userId.profilePicture || icon}
                       alt={comment.blogPostId.userId.username}
-                      style={{ width: 50, height: 50, objectFit: "cover" }}
                     />
                     <br />
                     <strong>{comment.blogPostId.userId.username}</strong>
@@ -66,30 +62,22 @@ const MyCommentsPage = () => {
                 )}
                 <div>
                   <p>on {new Date(comment.blogPostId.createdAt).toLocaleString("es-ES")}</p>
-                  <h2
+                  <h2 className="blogTitleClickable"
                     key={comment.blogPostId._id}
-                    style={{
-                      cursor: "pointer",
-                      color: "green",
-                      margin: "0.5em",
-                      height: "2em",
-                    }}
                     onClick={() => navigate(`/blogs/${comment.blogPostId._id}`)}
                   >
                     {comment.blogPostId.title}
                   </h2>
-                  <div>
+                  <div className="blogContentComment">
                     {comment.blogPostId.mediaContent?.[0] ? (
                       <img
                         src={comment.blogPostId.mediaContent[0]}
                         alt="Blog main"
-                        style={{ width: 200, objectFit: "cover", display: "block" }}
                       />
                     ) : (
                       <img
                         src={icon}
                         alt="Fallback"
-                        style={{ width: 200, objectFit: "cover", display: "block" }}
                       />
                     )}
 
@@ -104,26 +92,20 @@ const MyCommentsPage = () => {
 
                   {/*  Users Comment  */}
                   <hr />
-                  <div>
-                    <div>
+                  <div className="commentGeneralDiv">
+                    <div className="commentUserInfo">
                       {comment.userId && (
                         <>
-                          <img
+                          <img className="commentAuthImg"
                             src={comment.userId.profilePicture || icon}
                             alt={comment.userId.username}
-                            style={{
-                              width: 30,
-                              height: 30,
-                              objectFit: "cover",
-                              marginLeft: 8,
-                            }}
                           />
                           <br />
                           <span>{comment.userId.username}</span>
                         </>
                       )}
                     </div>
-                    <div style={{ marginTop: "1rem" }}>
+                    <div>
                       <p>on {new Date(comment.createdAt).toLocaleString("es-ES")}</p>
 
                       <p>{comment.content}</p>
