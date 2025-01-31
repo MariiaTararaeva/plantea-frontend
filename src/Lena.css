@@ -238,15 +238,16 @@ body {
 }
 
 /* Blog details COMMENTS modifications */
-.comment {
+.commentCard {
     box-shadow: 0 0 5px rgb(185, 185, 185);
     background-color: #ecdbd2;
     padding: 20px;
     display: flex;
     gap: 20px;
+    margin-top: 20px;
 }
 
-.comment img {
+.commentCard img {
     border-radius: 20px;
     height: 40px;
     width: 40px;

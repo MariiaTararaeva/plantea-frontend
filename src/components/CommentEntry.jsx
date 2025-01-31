@@ -60,7 +60,7 @@ const CommentEntry = ({ comment, onDeleteComment, onUpdateComment }) => {
     }
 
     return (
-        <div className="comment">
+        <div className="commentCard">
             <div>
                 <img src={comment.userId.profilePicture} alt={`${comment.userId.username} profile`} />
                 <p><strong>{comment.userId.username}</strong> </p>
