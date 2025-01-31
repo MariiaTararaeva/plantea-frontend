@@ -40,31 +40,25 @@ const MyBlogsPage = () => {
 
       {userBlogs.blogs && userBlogs.blogs.length > 0 ? (
         userBlogs.blogs.map((blog) => (
-          <div key={blog._id} style={{ border: "1px solid #ccc", margin: 8 }}>
+          <div key={blog._id} className="myBlogsEntry" >
             {blog.userId && (
-              <>
-                <img
+              <div >
+                <img className="blogAuthImg"
                   src={blog.userId.profilePicture}
                   alt={blog.userId.username}
-                  style={{ width: 50, height: 50, objectFit: "cover" }}
                 />
-                <p>Author: {blog.userId.username}</p>
-              </>
+                <p><strong> {blog.userId.username}</strong></p>
+              </div>
             )}
-            <h2
-              style={{
-                cursor: "pointer",
-                color: "green",
-                margin: "0.5em",
-                height: "2em",
-              }}
-              onClick={() => navigate(`/blogs/${blog._id}`)}
-            >
-              {" "}
-              {blog.title}
-            </h2>
-            <p>{blog.textContent}</p>
-            <img src={blog.mediaContent?.[0] || icon} alt="Blog" />
+            <div className="myBlogsEntryContent">
+              <h2 onClick={() => navigate(`/blogs/${blog._id}`)}>
+                {" "}
+                {blog.title}
+              </h2>
+              <p>{blog.textContent.substring(0, 250)}...</p>
+              <img src={blog.mediaContent?.[0] || icon} alt="Blog" />
+            </div>
+
           </div>
         ))
       ) : (

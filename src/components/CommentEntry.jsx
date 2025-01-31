@@ -61,10 +61,13 @@ const CommentEntry = ({ comment, onDeleteComment, onUpdateComment }) => {
 
     return (
         <div className="comment">
-            <img src={comment.userId.profilePicture} alt={`${comment.userId.username} profile`} width="40px" />
-            <div className="comment-content">
-                <p><strong>{comment.userId.username}</strong> - {new Date(comment.createdAt).toLocaleString('es-ES')}</p>
+            <div>
+                <img src={comment.userId.profilePicture} alt={`${comment.userId.username} profile`} />
+                <p><strong>{comment.userId.username}</strong> </p>
+            </div>
 
+            <div className="comment-content">
+                <p>- {new Date(comment.createdAt).toLocaleString('es-ES')}</p>
                 {isEditing ? (
                     <>
                         <textarea
