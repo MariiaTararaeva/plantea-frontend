@@ -75,6 +75,15 @@ body {
   transform: scale(1.1);
 }
 
+.homePageCards a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.homePageCards a:hover {
+    color: #d05d74;
+}
+
 /* sidebar styling */
 
 .appContainer {

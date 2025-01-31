@@ -30,6 +30,7 @@ const Navbar = () => {
       const data = await response.json();
       navigate("/search-results", {
         state: { searchResults: data },
+        state: { searchResults: data },
       });
     } catch (error) {
       console.error("Error fetching search results:", error);

@@ -39,9 +39,9 @@ const Sidebar = () => {
           <li>
             <Link to="/mycomments">My comments</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/profile/settings">Account settings</Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
       <button className="log-btn" onClick={logout}>

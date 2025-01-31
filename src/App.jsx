@@ -27,7 +27,7 @@ function App() {
     <>
       <Navbar />
       {/* Spacer for Navbar */}
-      <div className="h-20"></div>  
+      <div className="h-20"></div>
       <div className="appContainer">
         <div className="mainAppContent">
           <Routes>
@@ -68,11 +68,11 @@ function App() {
             <Route path="/blogs/:blogId" element={<BlogDetailsPage />} />
             <Route path="/blogs/edit/:blogId" element={<NewBlogPage />} />
             <Route path="/AboutUs" element={<AboutUsPage />} />
-            <Route path="/randomplants" element={<RandomPlantsPage />} />
+            <Route path="/discover" element={<RandomPlantsPage />} />
             <Route path="/siterules" element={<RulesPage />} />
             <Route path="/search-results" element={<SearchResultsPage />} />
             <Route path="*" element={<h1>404 Page</h1>} />
-        </Routes>
+          </Routes>
 
         </div>
         <Sidebar />
