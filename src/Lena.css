@@ -208,6 +208,12 @@ body {
     max-width: 130px;
 }
 
+.blogAuthor img {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
 .blogImgAndContent {
     display: flex;
     gap: 20px;
