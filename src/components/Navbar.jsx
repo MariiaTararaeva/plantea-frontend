@@ -56,11 +56,8 @@ const Navbar = () => {
             <button onClick={() => navigate("/blogs/new")} className="relative">
               New blog entry
             </button>
-            <button
-              onClick={() => navigate("/randomplants")}
-              className="relative"
-            >
-              Random Plants
+            <button onClick={() => navigate("/discover")} className="relative">
+              Discover Plants
             </button>
             <button onClick={() => navigate("/siterules")} className="relative">
               Rules
