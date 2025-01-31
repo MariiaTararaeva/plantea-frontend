@@ -40,8 +40,8 @@ const MyCommentsPage = () => {
   }, [token]);
 
   return (
-    <div>
-      <h1>Your Activity</h1>
+    <div className="comment">
+      <h1 className="h1">Your Activity</h1>
 
       {userComments.length > 0 ? (
         userComments.map((comment) => (
@@ -61,7 +61,7 @@ const MyCommentsPage = () => {
                   </div>
                 )}
                 <div>
-                  <p>on {new Date(comment.blogPostId.createdAt).toLocaleString("es-ES")}</p>
+                  <p>on{" "} {new Date(comment.blogPostId.createdAt).toLocaleString("es-ES")}</p>
                   <h2 className="blogTitleClickable"
                     key={comment.blogPostId._id}
                     onClick={() => navigate(`/blogs/${comment.blogPostId._id}`)}
@@ -109,17 +109,15 @@ const MyCommentsPage = () => {
                       <p>on {new Date(comment.createdAt).toLocaleString("es-ES")}</p>
 
                       <p>{comment.content}</p>
-
                     </div>
                   </div>
                 </div>
-
               </>
             )}
           </div>
         ))
       ) : (
-        <p>You have not made any comments yet.</p>
+        <p className="about">You have not made any comments yet.</p>
       )}
 
       <button onClick={() => navigate("/blogs")}>See All Blogs</button>

@@ -2,7 +2,7 @@
     color: #cf487f;
     color: #d05d74;
     color: #df8758;
-    color: #54950E;
+    color: #54950e;
     color: #8daf6e;
     color: #362800;
     color: #479621;
@@ -19,20 +19,18 @@
     color: #d05d74;
     color: #cf487f;
     color: #d05d74;
-
-
 }
 
 body {
     background-color: #ffeadf;
 }
 
-
 /* Homepage styling */
 .card {
     border: solid goldenrod 1px;
     border-radius: 10px;
-    margin: 10px;
+    margin-left: 6rem;
+    margin-top: 1.5rem;
     padding: 20px;
     background-color: #fdf3ee;
     box-shadow: 0 0 4px #8daf6e;
@@ -40,7 +38,8 @@ body {
     gap: 20px;
     align-items: center;
     justify-content: center;
-    max-width: 700px;
+    max-width: 900px;
+    font-family: "Courier New", Courier, monospace;
 }
 
 .toblogsImg,
@@ -108,6 +107,7 @@ body {
     border-left: solid 1px #fad888; */
     width: 200px;
     /* Tamaño fijo */
+    font-family: "Courier New", Courier, monospace;
     position: sticky;
     top: 60px;
     /* Debajo del navbar */
@@ -117,7 +117,6 @@ body {
     border-left: solid 1px #fad888;
     padding: 20px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-
 }
 
 /* my comments  styling */

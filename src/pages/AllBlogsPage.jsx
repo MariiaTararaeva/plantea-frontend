@@ -55,9 +55,9 @@ const AllBlogsPage = () => {
   };
 
   return (
-    <div>
-      <h1>All Blogs</h1>
-      <ul>
+    <div className="blog-container">
+      <h1 className="h1">All Blogs</h1>
+      <ul className="blog-list">
         {blogs.map((blog) => (
           <li key={blog._id} className="blogCardLi">
             <div className="blogAuthor">

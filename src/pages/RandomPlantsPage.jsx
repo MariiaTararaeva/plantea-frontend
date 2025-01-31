@@ -33,11 +33,11 @@ const RandomPlantsPage = () => {
   return (
     <>
       <div>
-        <h1>Discover Popular Plants and Diseases</h1>
+        <h1 className="h1">Discover Popular Plants and Diseases</h1>
         <PlantDiseaseCarousel />
       </div>
       <div className="random-plants">
-        <h2>Random Plants and Facts</h2>
+        <h2 className="h2">Random Plants and Facts</h2>
         <div className="plant-grid">
           {plants.map((plant) => (
             <div
@@ -63,7 +63,9 @@ const RandomPlantsPage = () => {
             </div>
           ))}
         </div>
-        <button onClick={fetchRandomPlants}>Refresh</button>
+        <button className="middle-btn" onClick={fetchRandomPlants}>
+          Refresh
+        </button>
       </div>
     </>
   );

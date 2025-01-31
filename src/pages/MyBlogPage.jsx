@@ -36,7 +36,7 @@ const MyBlogsPage = () => {
   }, [token]);
   return (
     <div>
-      <h1>My Blogs</h1>
+      <h1 className="h1">My Blogs</h1>
 
       {userBlogs.blogs && userBlogs.blogs.length > 0 ? (
         userBlogs.blogs.map((blog) => (

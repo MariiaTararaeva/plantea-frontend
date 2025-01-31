@@ -183,7 +183,7 @@ const NewBlogPage = () => {
 
   return (
     <>
-      <h1>{blogId ? "Edit Blog" : "Create New Blog"}</h1>
+      <h1 className="h1">{blogId ? "Edit Blog" : "Create New Blog"}</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Title

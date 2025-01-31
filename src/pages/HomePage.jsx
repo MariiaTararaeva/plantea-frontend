@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "../components/navbarStyling.css";
 /* temporarely */
 import lena from "../images/Lena.png";
@@ -14,15 +13,12 @@ import "../assets/Forms.css";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
-
   return (
-
     <div className="main-content">
       <h1>Welcome to the Plant Blog!</h1>
       <div className="homePageCards">
         <Link to="/blogs">
           <div className="toBlogsCard card">
-
             <div className="toblogsImg">
               <img src={image1} className="HPimage img1" />
               <img src={image2} className="HPimage img2" />

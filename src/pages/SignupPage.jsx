@@ -27,7 +27,7 @@ const SignupPage = () => {
 
   return (
     <div>
-      <h1>Sign Up</h1>
+      <h1 className="h1">Sign Up</h1>
       <AuthForm
         isSignup={true}
         submitCallback={handleSignup}

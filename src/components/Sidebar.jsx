@@ -19,14 +19,17 @@ const Sidebar = () => {
           width: 100,
           height: 100,
           borderRadius: "50%",
+          alignItems: "center",
+          textAlign: "center",
+          marginLeft: 40,
         }}
       />
-      <h3>{user.username}</h3>
+      <h3 className="">{user.username}</h3>
       <p>
         {user.name} {user.surname}
       </p>
       <nav>
-        <ul>
+        <ul className="ul-Profile">
           <li>
             <Link to="/profile">My Profile</Link>
           </li>
@@ -41,7 +44,9 @@ const Sidebar = () => {
           </li> */}
         </ul>
       </nav>
-      <button onClick={logout}>Log out</button>
+      <button className="log-btn" onClick={logout}>
+        Log out
+      </button>
     </div>
   ) : (
     <div className="sidebar">

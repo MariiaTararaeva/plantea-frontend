@@ -23,9 +23,12 @@ const LoginPage = () => {
         setToken(data.token);
 
         // fetching user data and use the setUser from context ???
-        const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/auth/verify`, {
-          headers: { Authorization: `Bearer ${data.token}` },
-        })
+        const userResponse = await fetch(
+          `${import.meta.env.VITE_API_URL}/auth/verify`,
+          {
+            headers: { Authorization: `Bearer ${data.token}` },
+          }
+        );
 
         if (userResponse.ok) {
           const userData = await userResponse.json();
@@ -39,7 +42,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <h1>Login</h1>
+      <h1 className="h1">Login</h1>
       <AuthForm
         submitCallback={handleLogin}
         fields={[

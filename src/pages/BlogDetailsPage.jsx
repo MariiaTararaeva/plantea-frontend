@@ -98,23 +98,25 @@ const BlogDetailsPage = () => {
         />
       </div>
       <div className="blogContent">
-        <h1>{blogEntry.title} </h1>
+        <h1 className="h1">{blogEntry.title} </h1>
         <p>
           created by {blogEntry.userId.username} -{" "}
           {new Date(blogEntry.createdAt).toLocaleString("es-ES")}
         </p>
-        {blogEntry?.selectedSpecies?.[0]?.default_image ? 
+        {blogEntry?.selectedSpecies?.[0]?.default_image ? (
           <img
-          src={blogEntry.selectedSpecies[0].default_image}
-          alt={"https://placehold.co/50x50"}
-          style={{ width: "50px", marginRight: "10px" }}
-        /> 
-        :              <img
-        src={"https://placehold.co/50x50"}
-        alt={"https://placehold.co/50x50"}
-        style={{ width: "50px", marginRight: "10px" }}
-      /> }
-          <p style={{ whiteSpace: "pre-line" }}>{blogEntry.textContent} </p>
+            src={blogEntry.selectedSpecies[0].default_image}
+            alt={"https://placehold.co/50x50"}
+            style={{ width: "50px", marginRight: "10px" }}
+          />
+        ) : (
+          <img
+            src={"https://placehold.co/50x50"}
+            alt={"https://placehold.co/50x50"}
+            style={{ width: "50px", marginRight: "10px" }}
+          />
+        )}
+        <p style={{ whiteSpace: "pre-line" }}>{blogEntry.textContent} </p>
       </div>
       <div className="commentSection">
         <h3>Comments</h3>

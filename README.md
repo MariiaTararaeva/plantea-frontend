@@ -2,7 +2,8 @@
 <br>
 
 ## Description
-A blog and information gathering website about growing plants, how to cure diseases and contribute and learn as you wish
+A blog and information gathering website about growing plants, how to cure diseases and contribute and learn as you wish. 
+All the information regarding the plant and diseases information content belongs to [perenual](https://perenual.com/) 
 <br>
 
 ## User stories
@@ -30,7 +31,7 @@ A blog and information gathering website about growing plants, how to cure disea
     - email
     - password
     - first name
-    - 
+    - last name
 - POST /auth/login
   - redirects to /profile if user logged in
 

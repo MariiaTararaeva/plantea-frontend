@@ -72,7 +72,7 @@ const ProfilePage = () => {
     <div>
       {!isEditing ? (
         <div>
-          <h1>
+          <h1 className="profileText">
             {user.firstName} {user.surname}
           </h1>
 
@@ -136,23 +136,23 @@ const ProfilePage = () => {
           </label>
 
           {uploading && <p>Uploading...</p>}
-
-          <p>
-            <strong>Username:</strong> {user.username}
-          </p>
-          <p>
-            <strong>Email:</strong> {user.email}
-          </p>
-          <p>
-            <strong>Bio:</strong> {user.bioDescription || "No bio provided."}
-          </p>
-          <p>
-            <strong>Greenhouse:</strong>
-            {Array.isArray(user.greenhouse)
-              ? user.greenhouse.join(", ")
-              : "None"}
-          </p>
-
+          <div className="profileText">
+            <p>
+              <strong>Username:</strong> {user.username}
+            </p>
+            <p>
+              <strong>Email:</strong> {user.email}
+            </p>
+            <p>
+              <strong>Bio:</strong> {user.bioDescription || "No bio provided."}
+            </p>
+            <p>
+              <strong>Greenhouse:</strong>
+              {Array.isArray(user.greenhouse)
+                ? user.greenhouse.join(", ")
+                : "None"}
+            </p>
+          </div>
           <button onClick={() => setIsEditing(true)}>Edit Profile</button>
         </div>
       ) : (

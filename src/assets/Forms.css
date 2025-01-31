@@ -1,4 +1,8 @@
 /* General Form Styling */
+.about {
+  font-family: "Courier New", Courier, monospace;
+  margin: 40px;
+}
 form {
   background-color: #fdf3ee; /* Soft warm background */
   border: 1px solid goldenrod;
@@ -10,6 +14,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  font-family: "Courier New", Courier, monospace;
 }
 
 /* Labels */
@@ -27,6 +32,7 @@ textarea {
   border-radius: 5px;
   background-color: #f0e7e2;
   transition: all 0.3s ease-in-out;
+  font-family: "Courier New", Courier, monospace;
 }
 
 /* Buttons Container */
@@ -43,15 +49,37 @@ button {
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
+  font-size: small;
   cursor: pointer;
+  align-items: center;
+  margin-right: 20px;
+  margin-left: auto;
   font-weight: bold;
   transition: all 0.3s ease-in-out;
-  flex: 1; /* Makes buttons the same size */
-  max-width: 120px; /* Prevents buttons from being too wide */
+  flex-direction: column; /* Makes buttons the same size */
+  max-width: 190px; /* Prevents buttons from being too wide */
+  font-family: "Courier New", Courier, monospace;
+}
+.relative {
+  background-color: transparent;
+  color: white;
+  font-size: medium;
+  margin-left: 0; /* Ensures alignment to the left */
+  display: flex; /* Enables proper alignment */
+  justify-content: flex-start; /* Aligns content to the left */
+  align-items: center; /* Centers vertically */
+  max-width: 200px;
+  white-space: nowrap; /* Prevents text from breaking onto a new line */
+  text-decoration: none; /* Removes default underlines */
+  padding: 5px 10px;
+}
+
+.relative:hover {
+  text-decoration: underline; /* Underlines text on hover */
 }
 
 button:hover {
-  background-color: #cf487f;
+  background-color: #df8758;
   transform: scale(1.05);
 }
 
@@ -65,17 +93,51 @@ button[type="button"]:hover {
   background-color: #d05d74;
 }
 
+.middle-btn {
+  background-color: #df8758; /* Warm earthy orange */
+  color: white; /* Contrast for readability */
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.middle-btn:hover {
+  background-color: #d05d74; /* Slightly deeper pinkish-red on hover */
+  transform: scale(1.05);
+}
+
+.middle-btn:active {
+  background-color: #cf487f;
+  transform: scale(0.98);
+}
+
 /* Homepage Styling */
 /* 🌱 Search Section */
-.searchDiv {
+.flex-items-center {
   padding: 15px;
   border-radius: 10px;
   text-align: center;
   margin-bottom: 20px;
+  font-family: "Courier New", Courier, monospace;
 }
-
+.uploaderInfo {
+  font-family: "Courier New", Courier, monospace;
+}
+.profileText {
+  font-family: "Courier New", Courier, monospace;
+  color: #362800;
+}
 /* 🔍 Search Bar */
-.search-bar {
+/* .search-bar {
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -88,20 +150,8 @@ button[type="button"]:hover {
   padding: 0;
 }
 
-.search-bar input {
-  flex: 1;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background-color: #fdf3ee;
-  transition: all 0.3s ease-in-out;
-}
 
-.search-bar input:focus {
-  outline: none;
-  border-color: #8daf6e;
-  box-shadow: 0 0 5px #8daf6e;
-}
-
+  */
 .search-bar button {
   background-color: goldenrod;
   color: white;
@@ -111,11 +161,6 @@ button[type="button"]:hover {
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s ease-in-out;
-}
-
-.search-bar button:hover {
-  background-color: #cf487f;
-  transform: scale(1.05);
 }
 
 /*  Search Results */
@@ -142,6 +187,7 @@ button[type="button"]:hover {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s;
   width: 130px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Courier New", Courier, monospace;
 }
 
 .plant-card:hover {
@@ -166,18 +212,7 @@ button[type="button"]:hover {
   padding: 20px;
   margin-top: 40px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* 🌿 Footer Text */
-/* 🌱 Footer Styling */
-.footer {
-  background-color: #fdf3ee; /* Soft warm background */
-  border-top: 2px solid goldenrod;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  font-family: "AdaleMono", monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 /* 🌿 Footer Title */
@@ -223,4 +258,240 @@ button[type="button"]:hover {
   color: #54950e; /* Same green as footer title */
   font-weight: bold;
   font-size: 18px;
+}
+.h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #54950e; /* Warm pink from your palette */
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: 20px;
+  font-family: "Courier New", Courier, monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #54950e; /* Vibrant green for contrast */
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* About Us */
+.ourStory {
+  text-align: center;
+  padding: 0px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.ourStory h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #cf487f;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ourStory p {
+  font-size: 1.3rem;
+  color: #362800;
+  line-height: 1.4;
+  padding: 20px;
+  margin-bottom: 20px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* 👥 Profile Sections */
+.justUs {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* 🔹 Each Profile Card */
+.justUs div {
+  background-color: #fdf3ee;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  text-align: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.justUs div:hover {
+  transform: scale(1.03);
+}
+
+/* 🖼️ Profile Images */
+.justUs img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* 📝 Name Styling */
+.justUs h3 {
+  font-size: 1.8rem;
+  color: #d05d74;
+  margin-bottom: 15px;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .justUs div {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .ourStory h2 {
+    font-size: 2rem;
+  }
+
+  .ourStory p {
+    font-size: 1rem;
+  }
+}
+/*plant details page */
+
+/* 🖼️ Plant Image */
+.plant-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+/* 📝 Plant Details */
+.main-content p {
+  font-size: 1.2rem;
+  color: #362800;
+  line-height: 1.6;
+  text-align: left;
+  padding: 10px 0;
+}
+
+/* 🌱 Container Styling */
+.blog-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: transparent;
+  border: none;
+}
+
+/* 🌿 Title Styling */
+
+/* 📝 Blog List - Removes Bullet Points */
+.blog-list {
+  list-style: none;
+  padding: 0;
+  background-color: transparent;
+}
+
+/* 📌 Individual Blog Item */
+.blog-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.blog-item:hover {
+  transform: scale(1.02);
+}
+
+/* 📸 Blog Image */
+.blog-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #df8758;
+}
+
+/* 🔹 Blog Title */
+.blog-item h2 {
+  font-size: 1.5rem;
+  color: #d05d74;
+  margin: 0;
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.blog-item h2:hover {
+  color: #cf487f;
+}
+
+/* 🎯 Blog Action Buttons */
+.blog-buttons {
+  display: flex;
+  gap: 10px;
+}
+.log-btn {
+  align-items: center;
+}
+
+.ul-Profile {
+  list-style: none;
+  align-items: center;
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width: 768px) {
+  .blog-container {
+    padding: 15px;
+    max-width: 95%;
+  }
+
+  .blog-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .blog-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .blog-buttons {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .h1 {
+    font-size: 2rem;
+  }
+
+  .main-content p {
+    font-size: 1rem;
+  }
 }
