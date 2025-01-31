@@ -59,44 +59,55 @@ const AllBlogsPage = () => {
       <h1>All Blogs</h1>
       <ul>
         {blogs.map((blog) => (
-          <li key={blog._id}>
-            <h2>{blog.title}</h2>
-            {/* if user selects a db image, take it as icon image, otherwise check uploaded images, if none display placeholder image */}
-            {blog?.selectedSpecies?.[0]?.default_image ? (
-              <img
-                src={blog.selectedSpecies[0].default_image}
-                alt={"https://placehold.co/50x50"}
-                style={{ width: "50px", marginRight: "10px" }}
-              />
-            ) : blog?.mediaContent?.[0]?.length > 0 ? (
-              <img
-                src={blog.mediaContent}
-                alt={"https://placehold.co/50x50"}
-                style={{ width: "50px", marginRight: "10px" }}
-              />
-            ) : (
-              <img
-                src={"https://placehold.co/50x50"}
-                alt={"https://placehold.co/50x50"}
-                style={{ width: "50px", marginRight: "10px" }}
-              />
-            )}
+          <li key={blog._id} className="blogCardLi">
+            <div className="blogAuthor">
+              <img src={blog.userId.profilePicture} alt="Author profile picture" />
+              <p>{blog.userId.username} </p>
+            </div>
+            <div className="blogInfo">
+              <p>on {new Date(blog.createdAt).toLocaleString("es-ES")} </p>
+              <h2>{blog.title}</h2>
+              <div className="blogImgAndContent">
+                {/* if user selects a db image, take it as icon image, otherwise check uploaded images, if none display placeholder image */}
+                {blog?.selectedSpecies?.[0]?.default_image ? (
+                  <img
+                    src={blog.selectedSpecies[0].default_image}
+                    alt={"https://placehold.co/50x50"}
+                  />
+                ) : blog?.mediaContent?.[0]?.length > 0 ? (
+                  <img
+                    src={blog.mediaContent}
+                    alt={"https://placehold.co/50x50"}
+                  />
+                ) : (
+                  <img
+                    src={"https://placehold.co/50x50"}
+                    alt={"https://placehold.co/50x50"}
+                  />
+                )}
+                <p>{blog.textContent.substring(0, 550)}... </p>
+              </div>
 
-            <button onClick={() => navigate(`/blogs/${blog._id}`)}>
-              View Details
-            </button>
+              <div className="blogbuttons">
+                <button onClick={() => navigate(`/blogs/${blog._id}`)}>
+                  View Details
+                </button>
 
-            {/* THESE TWO BUTTONS changed*/}
-            {user?._id === blog.userId._id && (
-              <>
-                <button onClick={() => navigate(`/blogs/edit/${blog._id}`)}>
-                  Edit Blog
-                </button>
-                <button onClick={() => handleDelete(blog._id)}>
-                  Delete Blog
-                </button>
-              </>
-            )}
+                {/* THESE TWO BUTTONS changed*/}
+                {user?._id === blog.userId._id && (
+                  <>
+                    <button onClick={() => navigate(`/blogs/edit/${blog._id}`)}>
+                      Edit Blog
+                    </button>
+                    <button onClick={() => handleDelete(blog._id)}>
+                      Delete Blog
+                    </button>
+                  </>
+                )}
+              </div>
+
+            </div>
+
           </li>
         ))}
       </ul>
